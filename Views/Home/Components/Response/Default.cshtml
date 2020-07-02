@@ -1,1 +1,44 @@
-﻿<p>response</p>
+﻿@model LongUrl.ViewModels.IndexViewModel
+
+@if (@Model != null)
+{
+    if (!@Model.OutSuccess)
+    {
+        <p class="alert-danger">Ошибка</p>
+        return;
+    }
+
+    if (@Model.OutUrl != null && @Model.OutUrl.Any())
+    {
+        string labelFound = @Model.OutUrl.Count == 1 ? "<span class=\"text-success\">Короткая ссылка расшифрована</span>" : "<span class=\"text-success\">Определена цепочка перенаправлений</span>";
+        <p>@labelFound</p>
+        foreach (string item in @Model.OutUrl)
+        {
+            <a href="@item" target="_blank">@item</a><br />
+        }
+
+        if (@Model.InAntivirus)
+        {
+            string labelAntivirus;
+            if (@Model.OutAntivirusStatus == AntivirusStatusType.Error)
+            {
+                labelAntivirus = "<span class=\"text-warning\">Ошибка проверки на вирусы</span>";
+            }
+            else if (@Model.OutAntivirusStatus == AntivirusStatusType.Clear)
+            {
+                labelAntivirus = "<span class=\"text-success\">Вирусы не найдены</span>";
+                string logAntivirus = @Model.OutAntivirusMessage;
+                <p>@labelAntivirus</p>
+                <p>@logAntivirus</p>
+            }
+            else
+            {
+                labelAntivirus = "<span class=\"text-danger\">Обнаружены вирусы</span>";
+                string logAntivirus = @Model.OutAntivirusMessage;
+                <p>@labelAntivirus</p>
+                <p>@logAntivirus</p>
+            }
+            <p>@labelAntivirus</p>
+        }
+    }
+}

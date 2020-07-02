@@ -13,7 +13,7 @@ namespace LongUrl.ViewModels
         public bool InAntivirus { get; set; }
         [Required]
         public bool InMultiUrl { get; set; }
-        [Required]
+        [Required][Url]
         public List<string> InUrlList { get; set; }
         public bool OutSuccess { get; set; }
         public List<string> OutUrl { get; set; }

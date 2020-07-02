@@ -4,16 +4,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1 class="text-center font-weight-bold">Введите короткую ссылку (short url) для расшифровки</h1>
-
-<form asp-action="Index" asp-controller="Home" asp-antiforgery="true" class="form-control-sm">
-    <input asp-for="InMultiUrl" type="radio" name="InMultiUrl" value="true" checked="checked"/>Расшифровка одной ссылки<br />
-    <input asp-for="InMultiUrl" type="radio" name="InMultiUrl" value="false"/>Пакетная расшифровка<br />
-    <textarea  asp-for="InUrlList" rows=""></textarea>
-    <input asp-for="InAntivirus"/>
-    <input type="submit"/>
-</form>
+ <div>
+     <h1 class="text-center font-weight-bold">Введите короткую ссылку (short url) для расшифровки</h1>
+ </div>
 
 <div>
-    <vc:response />
+    <form asp-action="Index" asp-controller="Home" asp-antiforgery="true" class="form-control-sm">
+        <p><input asp-for="InMultiUrl" type="radio" value="false" checked="checked" />Расшифровка одной ссылки</p>
+        <p><input asp-for="InMultiUrl" type="radio" value="true" />Пакетная расшифровка</p>
+        <p><textarea asp-for="InUrlList" rows=""></textarea></p>
+        <p><input asp-for="InAntivirus" /></p>
+        <input type="submit"/>
+    </form>
+</div>
+
+
+<div>
+    <vc:response request="@Model"/>
 </div>
