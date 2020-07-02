@@ -1,0 +1,19 @@
+﻿@model LongUrl.ViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1 class="text-center font-weight-bold">Введите короткую ссылку (short url) для расшифровки</h1>
+
+<form asp-action="Index" asp-controller="Home" asp-antiforgery="true" class="form-control-sm">
+    <input asp-for="InMultiUrl" type="radio" name="InMultiUrl" value="true" checked="checked"/>Расшифровка одной ссылки<br />
+    <input asp-for="InMultiUrl" type="radio" name="InMultiUrl" value="false"/>Пакетная расшифровка<br />
+    <textarea  asp-for="InUrlList" rows=""></textarea>
+    <input asp-for="InAntivirus"/>
+    <input type="submit"/>
+</form>
+
+<div>
+    <vc:response />
+</div>
