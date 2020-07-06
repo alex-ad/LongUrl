@@ -4,21 +4,49 @@
     ViewData["Title"] = "Home Page";
 }
 
- <div>
-     <h1 class="text-center font-weight-bold">Введите короткую ссылку (short url) для расшифровки</h1>
- </div>
-
-<div>
-    <form asp-action="Index" asp-controller="Home" asp-antiforgery="true" class="form-control-sm">
-        <p><input asp-for="InMultiUrl" type="radio" value="false" checked="checked" />Расшифровка одной ссылки</p>
-        <p><input asp-for="InMultiUrl" type="radio" value="true" />Пакетная расшифровка</p>
-        <p><textarea asp-for="InUrlList" rows=""></textarea></p>
-        <p><input asp-for="InAntivirus" /></p>
-        <input type="submit"/>
-    </form>
+<div class="row">
+    <div class="col">
+        <p class="text-center font-weight-bold">Введите короткую ссылку (short url) для расшифровки</p>
+    </div>
 </div>
 
+<div class="row">
+    <div class="col">
+        <form asp-action="Index" asp-controller="Home" asp-antiforgery="true">
+            <div class="custom-control custom-radio">
+                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InSingleUrl" value="false" checked>
+                <label class="custom-control-label" for="InSingleUrl">Расшифровка одной ссылки</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InMultiUrl" value="true">
+                <label class="custom-control-label" for="InMultiUrl">Пакетная расшифровка</label>
+            </div>
+            <div id="TextUrlSingle" class="form-group">
+                <input class="form-control form-control-sm urlSingle" asp-for="InUrlList" type="url"/>
+            </div>
+            <div id="TextUrlMulti" class="form-group hidden">
+                <textarea class="form-control form-control-sm urlMulti" asp-for="InUrlList" rows="5"></textarea>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" asp-for="InAntivirus" type="checkbox" id="InAntivirus">
+                <label class="custom-control-label" for="InAntivirus">Антивирусная проверка</label>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Расшифровка</button>
+        </form>
+    </div>
+</div>
 
-<div>
-    <vc:response request="@Model"/>
+<div id="blockProgress" class="row hidden" style="padding-top: 25px;">
+    <div class="col">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+    </div>
+</div>
+
+<div id="blockResponse" class="row" style="padding-top: 25px;">
+    <div class="col">
+        <vc:response request="@Model" />
+    </div>
 </div>

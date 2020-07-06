@@ -1,4 +1,18 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$("#InSingleUrl").click(function () {
+    $(".urlMulti").val("");
+    $("#TextUrlSingle").toggleClass("hidden");
+    $("#TextUrlMulti").toggleClass("hidden");
+});
 
-// Write your JavaScript code.
+$("#InMultiUrl").click(function () {
+    $(".urlSingle").val("");
+    $("#TextUrlSingle").toggleClass("hidden");
+    $("#TextUrlMulti").toggleClass("hidden");
+});
+
+$("button[type=submit").click(function () {
+    if ($(".urlMulti").val().length < 5 && $(".urlSingle").val().length < 5) return false;
+    $("#blockProgress").removeClass("hidden");
+    $("#blockResponse > .col").html("");
+    return true;
+});

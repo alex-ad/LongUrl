@@ -9,7 +9,7 @@ namespace LongUrl.Components
 {
     public class ResponseViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(IndexViewModel request, )
+        public IViewComponentResult Invoke(IndexViewModel request)
         {
             return View(request);
         }
