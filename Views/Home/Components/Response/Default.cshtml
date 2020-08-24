@@ -31,6 +31,8 @@
             <br />
         }
 
+        <div class="space"></div>
+
         if (@Model.InAntivirus && !Model.InMultiUrl)
         {
             if (@Model.OutSafeBrowsing)
@@ -59,16 +61,24 @@
                 <p class="drweb">
                     <span class="virusOff">Вирусы не найдены</span>
                     <span class="rem"> проверено <a href="http://www.drweb.com" target="_blank" title="Антивирус Dr.Web">Dr.Web</a></span>
+                    <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">Показать/скрыть подробности</a>
                 </p>
-                <div id="log">@Html.Raw(@Model.OutAntivirusMessage)</div>
+                <div class="collapse" id="log">
+                    <div class="card card-body" style="font-size: small;">@Html.Raw(@Model.OutAntivirusMessage)</div>
+                </div>
+                <div class="space"></div>
             }
             else
             {
                 <p class="drweb">
                     <span class="virusOn">Обнаружены вирусы</span>
                     <span class="rem"> проверено <a href="http://www.drweb.com" target="_blank" title="Антивирус Dr.Web">Dr.Web</a></span>
+                    <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">Показать/скрыть подробности</a>
                 </p>
-                <div id="log">@Html.Raw(@Model.OutAntivirusMessage)</div>
+                <div class="collapse" id="log">
+                    <div class="card card-body" style="font-size: small;">@Html.Raw(@Model.OutAntivirusMessage)</div>
+                </div>
+                <div class="space"></div>
             }
         }
     }

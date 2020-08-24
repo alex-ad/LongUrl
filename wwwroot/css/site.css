@@ -24,11 +24,11 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 12px;
+  font-size: 14px;
 }
 @media (min-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -116,4 +116,16 @@ a[target="_blank"] {
 #log {
     max-height: 290px;
     overflow: auto;
+}
+
+.space {
+    display: table;
+    height: 15px;
+}
+
+.btn-log {
+    padding: 0;
+    vertical-align: baseline;
+    font-size: small;
+    color: darkblue;
 }

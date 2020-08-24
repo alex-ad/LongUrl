@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using LongUrl.Core;
 using LongUrl.ViewModels;
 
 namespace LongUrl.Models
@@ -21,9 +18,9 @@ namespace LongUrl.Models
 
         public RequestUrl(IndexViewModel data)
         {
-            if (data.InUrlList == null || !data.InUrlList.Any())
-                throw new ArgumentException("The URL List is empty", nameof(data.InUrlList));
             UrlList = data.InUrlList?.Last()?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Distinct().ToList();
+            if (UrlList == null || !UrlList.Any())
+                throw new ArgumentException("The URL List is empty", nameof(data.InUrlList));
             MultiUrl = data.InMultiUrl;
             UrlSingle = data.InUrlSingle;
             Antivirus = data.InMultiUrl ? false : data.InAntivirus;
