@@ -1,7 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
+﻿a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -27,11 +24,11 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 12px;
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -72,4 +69,51 @@ body {
 
 .hidden {
     display: none;
+}
+
+/* Response visual elements */
+a[target="_blank"] {
+    background: url(../images/blank.png) 0 5px no-repeat;
+    padding-left: 15px;
+    word-wrap: break-word;
+}
+
+.gsb {
+    background: url(../images/gsb.png) no-repeat;
+    line-height: 32px;
+    height: 32px;
+    margin-bottom: 10px;
+}
+
+.drweb {
+    background: url(../images/drweb.png) no-repeat;
+    line-height: 32px;
+    height: 32px;
+    margin-bottom: 10px;
+}
+
+.virusOn {
+    color: #FF0000;
+    font-weight: bold;
+    padding-left: 40px;
+}
+
+.virusOff {
+    color: #278D25;
+    font-weight: bold;
+    padding-left: 40px;
+}
+
+.rem, .rem a {
+    font-style: italic;
+    font-size: 8pt;
+    color: #888888;
+    text-decoration: none;
+    background: none;
+    padding: 0;
+}
+
+#log {
+    max-height: 290px;
+    overflow: auto;
 }

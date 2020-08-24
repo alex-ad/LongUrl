@@ -27,7 +27,7 @@
             <div id="TextUrlMulti" class="form-group @Html.Raw(Model != null && Model.InMultiUrl ? "" : "hidden")">
                 <textarea class="form-control form-control-sm urlMulti" asp-for="InUrlList" rows="5"></textarea>
             </div>
-            <div id="checkIsAntivirusCheck" class="custom-control custom-checkbox">
+            <div id="checkIsAntivirusCheck" class="custom-control custom-checkbox @Html.Raw(Model != null && Model.InMultiUrl ? "hidden" : "")">
                 <input class="custom-control-input" asp-for="InAntivirus" type="checkbox" id="InAntivirus"/>
                 <label class="custom-control-label" for="InAntivirus">Антивирусная проверка</label>
             </div>

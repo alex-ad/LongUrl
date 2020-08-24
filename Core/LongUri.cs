@@ -64,7 +64,7 @@ namespace LongUrl.Core
             Uri uri;
             try
             {
-                uri = new Uri(url);
+                uri = new Uri(url.Trim());
             }
             catch (UriFormatException)
             {

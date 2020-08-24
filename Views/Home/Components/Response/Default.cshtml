@@ -1,22 +1,28 @@
-﻿@model LongUrl.ViewModels.IndexViewModel
+﻿@using System.Linq
+@model LongUrl.ViewModels.IndexViewModel
 
 @if (@Model != null)
 {
     if (!@Model.OutSuccess)
     {
-        <p class="alert-danger">Ошибка</p>
-        return;
+        <div class="alert alert-warning" role="alert">
+            Произошла ошибка при расшифровке сслылки. Проверьте правильность ввода данных.
+        </div>
     }
 
-    if (@Model.OutUrl != null && @Model.OutUrl.Any())
+    else if (@Model.OutUrl != null && @Model.OutUrl.Any())
     {
         if (Model.OutUrl.Count == 1)
         {
-            <p><span class="text-success">Короткая ссылка расшифрована</span></p>
+            <p class="font-weight-bold text-success">Короткая ссылка успешно расшифрована</p>
+        }
+        else if (Model.OutUrl.Count > 1 && Model.InMultiUrl)
+        {
+            <p class="font-weight-bold text-success">Короткие ссылки расшифрованы</p>
         }
         else
         {
-            <p><span class="text-success">Определена цепочка перенаправлений</span></p>
+            <p class="font-weight-bold text-success">Определена цепочка перенаправлений</p>
         }
 
         foreach (string item in @Model.OutUrl)
@@ -24,32 +30,45 @@
             <a href="@item" target="_blank">@item</a>
             <br />
         }
-        <br />
 
-        if (@Model.InAntivirus)
+        if (@Model.InAntivirus && !Model.InMultiUrl)
         {
+            if (@Model.OutSafeBrowsing)
+            {
+                <p class="gsb">
+                    <span class="virusOff">Безопасная ссылка</span>
+                    <span class="rem"> проверено <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="Безопасный поиск Google">Google</a></span>
+                </p>
+            }
+            else
+            {
+                <p class="gsb">
+                    <span class="virusOn">Небезопасная ссылка</span>
+                    <span class="rem"> проверено <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="Безопасный поиск Google">Google</a></span>
+                </p>
+            }
+
             if (@Model.OutAntivirusStatus == AntivirusStatusType.Error)
             {
-                <p><span class="text-warning">Ошибка проверки на вирусы</span></p>
+                <p class="drweb">
+                    <span class="font-weight-bold text-info" style="padding-left: 40px;">Ошибка проверки на вирусы</span>
+                </p>
             }
             else if (@Model.OutAntivirusStatus == AntivirusStatusType.Clear)
             {
-                <p><span class="text-success">Вирусы не найдены</span></p>
-                <p>@Html.Raw(@Model.OutAntivirusMessage)</p>
+                <p class="drweb">
+                    <span class="virusOff">Вирусы не найдены</span>
+                    <span class="rem"> проверено <a href="http://www.drweb.com" target="_blank" title="Антивирус Dr.Web">Dr.Web</a></span>
+                </p>
+                <div id="log">@Html.Raw(@Model.OutAntivirusMessage)</div>
             }
             else
             {
-                <p><span class="text-danger">Обнаружены вирусы</span></p>
-                <p>@Html.Raw(@Model.OutAntivirusMessage)</p>
-            }
-
-            if (@Model.OutSafeBrowsing)
-            {
-                <p><span class="text-success">Безопасная ссылка</span></p>
-            }
-            else
-            {
-                <p><span class="text-danger">Небезопасная ссылка</span></p>
+                <p class="drweb">
+                    <span class="virusOn">Обнаружены вирусы</span>
+                    <span class="rem"> проверено <a href="http://www.drweb.com" target="_blank" title="Антивирус Dr.Web">Dr.Web</a></span>
+                </p>
+                <div id="log">@Html.Raw(@Model.OutAntivirusMessage)</div>
             }
         }
     }
