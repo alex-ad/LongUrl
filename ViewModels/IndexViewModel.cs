@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using LongUrl.Models;
 
 namespace LongUrl.ViewModels
@@ -13,11 +10,14 @@ namespace LongUrl.ViewModels
         public bool InAntivirus { get; set; }
         [Required]
         public bool InMultiUrl { get; set; }
-        [Required][Url]
+        [Required] [Url]
         public List<string> InUrlList { get; set; }
+        [Required] [Url]
+        public string InUrlSingle { get; set; }
         public bool OutSuccess { get; set; }
         public List<string> OutUrl { get; set; }
         public AntivirusStatusType OutAntivirusStatus { get; set; }
         public string OutAntivirusMessage { get; set; }
+        public bool OutSafeBrowsing { get; set; }
     }
 }

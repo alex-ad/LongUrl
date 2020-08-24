@@ -14,25 +14,25 @@
     <div class="col">
         <form asp-action="Index" asp-controller="Home" asp-antiforgery="true">
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InSingleUrl" value="false" checked>
+                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InSingleUrl" value="false" checked/>
                 <label class="custom-control-label" for="InSingleUrl">Расшифровка одной ссылки</label>
             </div>
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InMultiUrl" value="true">
+                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InMultiUrl" value="true"/>
                 <label class="custom-control-label" for="InMultiUrl">Пакетная расшифровка</label>
             </div>
-            <div id="TextUrlSingle" class="form-group">
-                <input class="form-control form-control-sm urlSingle" asp-for="InUrlList" type="url"/>
+            <div id="TextUrlSingle" class="form-group @Html.Raw(Model != null && Model.InMultiUrl ? "hidden" : "")">
+                <input class="form-control form-control-sm urlSingle" asp-for="InUrlSingle" type="url"/>
             </div>
-            <div id="TextUrlMulti" class="form-group hidden">
+            <div id="TextUrlMulti" class="form-group @Html.Raw(Model != null && Model.InMultiUrl ? "" : "hidden")">
                 <textarea class="form-control form-control-sm urlMulti" asp-for="InUrlList" rows="5"></textarea>
             </div>
-            <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" asp-for="InAntivirus" type="checkbox" id="InAntivirus">
+            <div id="checkIsAntivirusCheck" class="custom-control custom-checkbox">
+                <input class="custom-control-input" asp-for="InAntivirus" type="checkbox" id="InAntivirus"/>
                 <label class="custom-control-label" for="InAntivirus">Антивирусная проверка</label>
             </div>
-            <br />
-            <button type="submit" class="btn btn-primary">Расшифровка</button>
+            <br/>
+            <button type="submit" class="btn btn-sm btn-primary">Расшифровка</button>
         </form>
     </div>
 </div>

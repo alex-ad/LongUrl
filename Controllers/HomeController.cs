@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using LongUrl.Models;
 using LongUrl.Core;
 using LongUrl.ViewModels;
@@ -28,6 +25,7 @@ namespace LongUrl.Controllers
             data.OutAntivirusStatus = responseUrl.AntivirusStatus;
             data.OutSuccess = responseUrl.Success;
             data.OutUrl = responseUrl.Url;
+            data.OutSafeBrowsing = responseUrl.SafeBrowsing;
             return View(data);
         }
 

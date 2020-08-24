@@ -22,13 +22,15 @@ namespace LongUrl.Models
         {
             if (data.InUrlList == null || !data.InUrlList.Any())
                 throw new ArgumentException("The URL List is empty", nameof(data.InUrlList));
-            UrlList = data.InUrlList;
+            UrlList = data.InUrlList.Last().Split("\r\n", StringSplitOptions.RemoveEmptyEntries).ToList();
             MultiUrl = data.InMultiUrl;
+            UrlSingle = data.InUrlSingle;
             Antivirus = data.InMultiUrl ? false : data.InAntivirus;
         }
 
         public bool Antivirus { get; set; }
         public bool MultiUrl { get; set; }
         public List<string> UrlList { get; set; }
+        public string UrlSingle { get; set; }
     }
 }

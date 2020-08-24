@@ -18,10 +18,11 @@
         {
             <p><span class="text-success">Определена цепочка перенаправлений</span></p>
         }
-        
+
         foreach (string item in @Model.OutUrl)
         {
-            <a href="@item" target="_blank">@item</a><br />
+            <a href="@item" target="_blank">@item</a>
+            <br />
         }
         <br />
 
@@ -40,6 +41,15 @@
             {
                 <p><span class="text-danger">Обнаружены вирусы</span></p>
                 <p>@Html.Raw(@Model.OutAntivirusMessage)</p>
+            }
+
+            if (@Model.OutSafeBrowsing)
+            {
+                <p><span class="text-success">Безопасная ссылка</span></p>
+            }
+            else
+            {
+                <p><span class="text-danger">Небезопасная ссылка</span></p>
             }
         }
     }

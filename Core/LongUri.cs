@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using LongUrl.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace LongUrl.Core
 {
@@ -20,6 +17,7 @@ namespace LongUrl.Core
         public LongUri(RequestUrl requestUrl)
         {
             _requestUrl = requestUrl;
+            if (!_requestUrl.MultiUrl) _requestUrl.UrlList = new List<string>{ _requestUrl.UrlSingle };
             _responseUrl = new ResponseUrl();
         }
 
@@ -29,12 +27,12 @@ namespace LongUrl.Core
             {
                 foreach (string uri in _requestUrl.UrlList)
                 {
+                    if (string.IsNullOrEmpty(uri)) continue;
                     _urlItem = new UrlItem(uri);
                     List<string> list = new List<string>();
                     do
                     {
-                        UrlParsedType urlParsed = null;
-                        urlParsed = new UrlParsedType(_urlItem.Next);
+                        UrlParsedType urlParsed = new UrlParsedType(_urlItem.Next);
                         _urlItem.Next = urlParsed.Url;
                         await GetLongUrlFromShort(_urlItem.Next);
                         if (_urlItem.Uncovered != null) list.Add(_urlItem.Uncovered);
@@ -46,7 +44,8 @@ namespace LongUrl.Core
 
                 if ((_responseUrl.Success) && (_requestUrl.Antivirus))
                 {
-                    await AntivirusCheck(_responseUrl.Url.Last());
+                    var mw = new MalwareScanner(_responseUrl);
+                    await mw.Go();
                 }
 
                 return _responseUrl;
@@ -103,30 +102,6 @@ namespace LongUrl.Core
             {
                 _urlItem.Success = true;
             }
-        }
-
-        private async Task AntivirusCheck(string url)
-        {
-            HttpClient http = new HttpClient();
-            string request = "http://online.drweb.com/result/?url=" + url;
-            HttpResponseMessage response = await http.GetAsync(request);
-
-            if (response.StatusCode != HttpStatusCode.OK) return;
-
-            string responseMessage = response.Content.ReadAsStringAsync().Result;
-            int posStart = responseMessage.IndexOf("<!-- scan report begin -->");
-            posStart = posStart < 0 ? posStart : posStart + "<!-- scan report begin -->".Length;
-            int posEnd = responseMessage.LastIndexOf("<!-- scan report end -->");
-
-            if (responseMessage.Contains("<!-- X_SCAN_STATE: CLEAN -->"))
-                _responseUrl.AntivirusStatus = AntivirusStatusType.Clear;
-            else if (responseMessage.Contains("<!-- X_SCAN_STATE: INFECTED -->"))
-                _responseUrl.AntivirusStatus = AntivirusStatusType.Infected;
-            else _responseUrl.AntivirusStatus = AntivirusStatusType.Error;
-
-            if (posStart < 0 || posEnd < 0) return;
-
-            _responseUrl.AntivirusMessage = responseMessage.Substring(posStart, posEnd - posStart);
         }
     }
 }

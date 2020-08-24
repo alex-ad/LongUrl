@@ -1,18 +1,19 @@
-﻿$("#InSingleUrl").click(function () {
+﻿$("#InSingleUrl").change(function () {
     $(".urlMulti").val("");
-    $("#TextUrlSingle").toggleClass("hidden");
-    $("#TextUrlMulti").toggleClass("hidden");
+    $("#TextUrlSingle").removeClass("hidden");
+    $("#TextUrlMulti").addClass("hidden");
+    $("#checkIsAntivirusCheck").removeClass("hidden");
 });
 
-$("#InMultiUrl").click(function () {
+$("#InMultiUrl").change(function () {
     $(".urlSingle").val("");
-    $("#TextUrlSingle").toggleClass("hidden");
-    $("#TextUrlMulti").toggleClass("hidden");
+    $("#TextUrlSingle").addClass("hidden");
+    $("#TextUrlMulti").removeClass("hidden");
+    $("#checkIsAntivirusCheck").addClass("hidden");
 });
 
 $("button[type=submit").click(function () {
-    if ($(".urlMulti").val().length < 5 && $(".urlSingle").val().length < 5) return false;
+    if ($(".urlMulti").val().length < 5 && $(".urlSingle").val().length < 5) return;
     $("#blockProgress").removeClass("hidden");
     $("#blockResponse > .col").html("");
-    return true;
 });
