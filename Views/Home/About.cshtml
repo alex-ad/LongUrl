@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = @SharedLocalizer["menu_about"];
+}
+
+<h4>Что такое короткие ссылки (short url), и зачем их раскрывать</h4>
+<br />
+<div>
+    <p>Люди придумали <strong>короткие ссылки (Short URLs)</strong> для удобства обмена ссылками на какие-либо странички в сети Интернет. Довольно часто бывают ситуации, когда ссылки на какой-нибудь сайт получаются очень уж длинными, и потому неудобными для того, чтобы делиться ими с кем-то.</p>
+    <p>Ну, Вы сами представьте, что удобнее, послать по почте или в чате (не говоря уж - о, ужас! -, диктовать кому-то по буквам) ссылку из десяти символов, или из пятисот. Вот. Именно это проделают все существующие сервисы укорачивая ссылок.</p>
+    <p>Но, как и многое другое в этом мире, этот инструмент имеет и отрицательную сторону. Дело в том, что переходя по короткой ссылке, человек не видит, куда, собственно, он переходит. А увидит он это только после совершения самого перехода. В нормальной ситуации - если Вы получили короткую ссылку от доверенного лица - здесь нет ничего страшного. Однако с самого появления сервисов укорачивания ссылок, этот инструмент взяли на вооружение спамеры и другие несознательные элементы из около хакерских кругов. В итоге, кликая по короткой ссылке, можно запросто оказаться на каком-нибудь зловредном ресурсе, где от вирусов и прочей малвари не будет отбоя.</p>
+    <p>Вот мы и подошли к главному. Чтобы избежать неприятной ситуации, описанной выше, и был создан данный ресурс - <strong>Раскрытие (расшифровка) коротких ссылок</strong>.</p>
+    <p>
+        Что мы делаем:
+        <ul>
+            <li>Раскрываем (расшифровуем) короткую ссылку</li>
+            <li>Проверяем ресурс на наличие вредоносного кода с помощью Антивируса Dr.Web</li>
+            <li>Проверяем ресурс на потенциальную опасность с помощью технологии Google Safe Browsing</li>
+        </ul>
+    </p>
+    <p>После раскрытия короткой ссылки, Вы можете уже осознанно решить, открывать ссылку, или нет.</p>
+</div>
+
+<h4>What is the Short URLs (short links), and why we have to disclose it</h4>
+<br />
+<div>
+    <p><strong>Short URLs</strong> were created for the comfortable sharing of links to any page on the Internet. There are many situations when the URLs are too long, so it's uncomfortable to share them with someone.</p>
+    <p>Well, imagine yourself what it is more convenient, share URLs (by mail, in chat... or to dictate!) length in ten characters, or five hundred. Here you go. That's the mission of all services by shortening URLs.</p>
+    <p>But, like so much else in this world, this tool has a negative side too. The fact is that clicking on a short URL, noone can see where, in fact, he goes. In a normal situation - if you got the short URL from a trusted person - there is nothing to worry about. However, since a moment of birth of short URLs, spammers and hackers begin to use this tool. As a result, by clicking on a short URL, you can easily turn on any threatening or abusive resource.</p>
+    <p>This brings us to the main question. To avoid an unpleasant situation, as described above, and was created this resource - <strong>Decoding (disclosure) short links (short URLs)</strong>.</p>
+    <p>
+        What that service suggests you:
+        <ul>
+            <li>Disclose (decode) short URLs</li>
+            <li>Check out the resource for malicious code using the Dr.Web Antivirus</li>
+            <li>Detect malicious URLs using Google Safe Browsing</li>
+        </ul>
+    </p>
+    <p>After the disclosure of short links, you may have to consciously decide to open a link, or not.</p>
+</div>

@@ -129,3 +129,50 @@ a[target="_blank"] {
     font-size: small;
     color: darkblue;
 }
+
+/* Validation */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error, textarea.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Comments */
+.fb-comments {
+    width: 100%;
+}
+
+#vk_comments {
+    width: 100%;
+}
+
+/* Page API */
+.color-param {
+    color: #900000;
+}
+code {
+    word-break: keep-all;
+    overflow-x: auto;
+    border-left: 3px solid #ececec;
+    padding-left: 7px;
+    margin: 0;
+    display: inline-block;
+}

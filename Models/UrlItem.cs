@@ -13,7 +13,7 @@ namespace LongUrl.Models
             if ((string.IsNullOrEmpty(url)) || (url.Length < 4))
                 throw new ArgumentException("The URL must be greater then 4 symbols", nameof(url));
             Success = false;
-            Next = url;
+            Next = url.Trim();
             Uncovered = null;
         }
 

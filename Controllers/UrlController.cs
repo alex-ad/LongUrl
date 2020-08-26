@@ -33,7 +33,6 @@ namespace LongUrl.Controllers
                 ResponseUrl responseUrl = new ResponseUrl();
                 return responseUrl;
             }
-            
         }
     }
 }

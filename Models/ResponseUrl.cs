@@ -16,7 +16,7 @@ namespace LongUrl.Models
             Url = new List<string>();
             AntivirusStatus = AntivirusStatusType.Error;
             AntivirusMessage = string.Empty;
-            SafeBrowsing = true;
+            SafeBrowsing = false;
         }
 
         public bool Success => Url.Count > 0;

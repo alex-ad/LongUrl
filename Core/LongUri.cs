@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using LongUrl.Models;
 
@@ -23,13 +25,16 @@ namespace LongUrl.Core
 
         public async Task<ResponseUrl> Get()
         {
+            List<string> list = new List<string>();
             try
             {
+                if (_requestUrl.UrlList.Count > 25)
+                    _requestUrl.UrlList.RemoveRange(25, _requestUrl.UrlList.Count-25);
                 foreach (string uri in _requestUrl.UrlList)
                 {
                     if (string.IsNullOrEmpty(uri)) continue;
                     _urlItem = new UrlItem(uri);
-                    List<string> list = new List<string>();
+                    list = new List<string>();
                     do
                     {
                         UrlParsedType urlParsed = new UrlParsedType(_urlItem.Next);
@@ -52,6 +57,11 @@ namespace LongUrl.Core
             }
             catch
             {
+                if (list.Any())
+                {
+                    if (_requestUrl.MultiUrl) _responseUrl.Url.Add(list.Last());
+                    else _responseUrl.Url = list;
+                }
                 return _responseUrl;
             }
         }
@@ -61,10 +71,11 @@ namespace LongUrl.Core
             _urlItem.Success = false;
             _urlItem.Next = null;
             _urlItem.Uncovered = null;
+            url = url.Trim(new[] {' ', '/'});
             Uri uri;
             try
             {
-                uri = new Uri(url.Trim());
+                uri = new Uri(url);
             }
             catch (UriFormatException)
             {
@@ -72,8 +83,22 @@ namespace LongUrl.Core
             }
 
             HttpClient http = new HttpClient();
-            HttpResponseMessage response = await http.GetAsync(uri.ToString());
-            
+            http.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.89 Safari/537.36");
+            http.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            http.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+            http.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            http.BaseAddress = uri;
+            HttpResponseMessage response;
+            try
+            {
+                response = await http.GetAsync(uri.ToString());
+            }
+            catch (HttpRequestException ex)
+            {
+                return;
+            }
+            //HttpResponseMessage response = await http.GetAsync(uri.ToString());
+
             if ((response.StatusCode == HttpStatusCode.Redirect)                // 302
                 || (response.StatusCode == HttpStatusCode.Moved)                // 301
                 || (response.StatusCode == HttpStatusCode.RedirectKeepVerb)     // 307
@@ -83,16 +108,19 @@ namespace LongUrl.Core
                 )
             {
                 _urlItem.Success = true;
-                string ret = response.Headers.Location.OriginalString.Trim(new[] {' ', '/'});
-                _urlItem.Next = ret;
-                _urlItem.Uncovered = ret;
-                return;
-            }
 
-            if (!string.Equals(response.RequestMessage.RequestUri.OriginalString.Trim(new[] { ' ', '/' }), url, StringComparison.InvariantCultureIgnoreCase))
-            {
-                _urlItem.Success = true;
-                string ret = response.RequestMessage.RequestUri.OriginalString.Trim(new[] {' ', '/'});
+                UrlParsedType urlParsed = new UrlParsedType(response.RequestMessage.RequestUri.OriginalString.Trim(new[] { ' ', '/' }));
+                var parserUri = urlParsed.Url;
+
+                if (!string.Equals(parserUri, url, StringComparison.OrdinalIgnoreCase) && Uri.TryCreate(parserUri, UriKind.RelativeOrAbsolute, out Uri newUri) && IsUrlValid(newUri.OriginalString))
+                {
+                    _urlItem.Next = newUri.OriginalString;
+                    _urlItem.Uncovered = newUri.OriginalString;
+                    return;
+                }
+
+                var ret = response.Headers.Location.OriginalString.Trim(new[] { ' ', '/' });
+
                 _urlItem.Next = ret;
                 _urlItem.Uncovered = ret;
                 return;
@@ -100,8 +128,25 @@ namespace LongUrl.Core
 
             if (response.StatusCode == HttpStatusCode.OK)                       // 200
             {
+                if (!string.Equals(response.RequestMessage.RequestUri.OriginalString.Trim(new[] { ' ', '/' }), url, StringComparison.OrdinalIgnoreCase))
+                {
+                    var ret = response.RequestMessage.RequestUri.OriginalString.Trim(new[] { ' ', '/' });
+                    _urlItem.Next = ret;
+                    _urlItem.Uncovered = ret;
+                }
                 _urlItem.Success = true;
+                return;
+            }
+
+            if (response.StatusCode == HttpStatusCode.BadGateway)
+            {
+                var ret = response.RequestMessage.RequestUri.OriginalString.Trim(new[] { ' ', '/' });
+                _urlItem.Success = true;
+                _urlItem.Next = null;
+                _urlItem.Uncovered = ret;
             }
         }
+
+        private bool IsUrlValid(string url) => Regex.IsMatch(url, @"(ftp|http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
     }
 }

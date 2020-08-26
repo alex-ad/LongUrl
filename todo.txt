@@ -3,3 +3,15 @@
 	+3) из списка урлов убирать дубли
 	+4) лог антивируса - под кат
 5) валидация на клиенте и сервере
+	-6) в UrlParsedType вставить IsUrlValid
+	+7) Мультиязычность
+	+8) Куки
+
+---------
+https://bit.ly/2YbqC6J
+https://bit.ly/3hB2p1d
+https://bit.ly/3hNCdAu
+http://bit.ly/2uof7g3
+https://bit.ly/2V0bNDR
+https://vk.cc/9kUUrc
+https://tinyurl.com/y2266nmj
