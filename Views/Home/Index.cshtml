@@ -1,14 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@inject IHtmlLocalizer<Locale> Locale
 @model LongUrl.ViewModels.IndexViewModel
 
 @{
-    ViewData["Title"] = @SharedLocalizer["menu_main"];
+    ViewData["Title"] = Locale["menu_main"];
 }
 
 <div class="row">
     <div class="col">
-        <p class="text-center font-weight-bold">@SharedLocalizer["req_title"]</p>
+        <p class="text-center font-weight-bold">@Locale["req_title"]</p>
     </div>
 </div>
 
@@ -17,11 +17,11 @@
         <form asp-action="Index" asp-controller="Home" asp-antiforgery="true">
             <div class="custom-control custom-radio">
                 <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InSingleUrl" value="false" checked />
-                <label class="custom-control-label" for="InSingleUrl">@SharedLocalizer["typeSingle"]</label>
+                <label class="custom-control-label" for="InSingleUrl">@Locale["typeSingle"]</label>
             </div>
             <div class="custom-control custom-radio">
                 <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InMultiUrl" value="true" />
-                <label class="custom-control-label" for="InMultiUrl">@SharedLocalizer["typeMulti"]</label>
+                <label class="custom-control-label" for="InMultiUrl">@Locale["typeMulti"]</label>
             </div>
             <div class="space"></div>
             <div id="TextUrlSingle" class="form-group @Html.Raw(Model != null && Model.InMultiUrl ? "hidden" : "")">
@@ -29,15 +29,15 @@
                 <span asp-validation-for="InUrlSingle"></span>
             </div>
             <div id="TextUrlMulti" class="form-group @Html.Raw(Model != null && Model.InMultiUrl ? "" : "hidden")">
-                <textarea class="form-control form-control-sm urlMulti" asp-for="InUrlList" rows="5" placeholder="@SharedLocalizer["mURLinfo"]"></textarea>
+                <textarea class="form-control form-control-sm urlMulti" asp-for="InUrlList" rows="5" placeholder="@Locale["mURLinfo"]"></textarea>
                 <span asp-validation-for="InUrlList"></span>
             </div>
             <div id="checkIsAntivirusCheck" class="custom-control custom-checkbox @Html.Raw(Model != null && Model.InMultiUrl ? "hidden" : "")">
                 <input class="custom-control-input" asp-for="InAntivirus" type="checkbox" id="InAntivirus" />
-                <label class="custom-control-label" for="InAntivirus">@SharedLocalizer["chkVirus"]</label>
+                <label class="custom-control-label" for="InAntivirus">@Locale["chkVirus"]</label>
             </div>
             <br />
-            <button type="submit" class="btn btn-sm btn-primary">@SharedLocalizer["btnDecodeUrl"]</button>
+            <button type="submit" class="btn btn-sm btn-primary">@Locale["btnDecodeUrl"]</button>
         </form>
     </div>
 </div>
@@ -56,14 +56,14 @@
     </div>
 </div>
 
-<a class="btn btn-link" data-toggle="collapse" href="#Comments" role="button" aria-expanded="false" aria-controls="Comments" style="padding: 0 0 0.75rem 0">@SharedLocalizer["comm_show"]</a>
+<a class="btn btn-link" data-toggle="collapse" href="#Comments" role="button" aria-expanded="false" aria-controls="Comments" style="padding: 0 0 0.75rem 0">@Locale["comm_show"]</a>
 <div class="collapse" id="Comments">
     <ul class="nav nav-tabs" id="tabComments" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#vk" role="tab" aria-controls="vk" aria-selected="true">@SharedLocalizer["tab_vk"]</a>
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#vk" role="tab" aria-controls="vk" aria-selected="true">@Locale["tab_vk"]</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#fb" role="tab" aria-controls="fb" aria-selected="false">@SharedLocalizer["tab_fb"]</a>
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#fb" role="tab" aria-controls="fb" aria-selected="false">@Locale["tab_fb"]</a>
         </li>
     </ul>
     <div class="tab-content" id="tabContent">

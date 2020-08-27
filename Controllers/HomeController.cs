@@ -14,11 +14,11 @@ namespace LongUrl.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
+        private readonly IStringLocalizer<Locale> _locale;
 
-        public HomeController(IStringLocalizer<SharedResource> sharedLocalizer)
+        public HomeController(IStringLocalizer<Locale> locale)
         {
-            _sharedLocalizer = sharedLocalizer;
+            _locale = locale;
         }
 
         [HttpGet]
@@ -32,19 +32,19 @@ namespace LongUrl.Controllers
         {
             if (data.InMultiUrl && (data.InUrlList == null || !data.InUrlList.Any()))
             {
-                ModelState.AddModelError(nameof(data.InUrlList), _sharedLocalizer["validation_set_urls"]);
+                ModelState.AddModelError(nameof(data.InUrlList), _locale["validation_set_urls"]);
             }
 
             if (!data.InMultiUrl && (string.IsNullOrEmpty(data.InUrlSingle) || data.InUrlSingle.Length < 4))
             {
-                ModelState.AddModelError(nameof(data.InUrlSingle), _sharedLocalizer["validation_set_url"]);
+                ModelState.AddModelError(nameof(data.InUrlSingle), _locale["validation_set_url"]);
             }
 
             if (data.InMultiUrl && data.InUrlList != null && data.InUrlList.Any())
             {
                 var list = data.InUrlList.Last()?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Distinct().ToList();
                 if (list == null || !list.Any())
-                    ModelState.AddModelError(nameof(data.InUrlList), _sharedLocalizer["validation_set_urls"]);
+                    ModelState.AddModelError(nameof(data.InUrlList), _locale["validation_set_urls"]);
             }
 
             if (ModelState.IsValid)
@@ -74,11 +74,11 @@ namespace LongUrl.Controllers
         }
 
         [HttpGet]
-        public IActionResult SetLanguage(string lang, string returnUrl)
+        public IActionResult SetLanguage(string culture, string returnUrl)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(lang)),
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
 

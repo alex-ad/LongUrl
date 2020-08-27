@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@inject IHtmlLocalizer<Locale> Locale
 @using System.Linq
 @model LongUrl.ViewModels.IndexViewModel
 
@@ -8,7 +8,7 @@
     if (!@Model.OutSuccess)
     {
         <div class="alert alert-warning" role="alert">
-            @SharedLocalizer["error"]
+            @Locale["error"]
         </div>
     }
 
@@ -16,15 +16,15 @@
     {
         if (Model.OutUrl.Count == 1)
         {
-            <p class="font-weight-bold text-success">@SharedLocalizer["success"]</p>
+            <p class="font-weight-bold text-success">@Locale["success"]</p>
         }
         else if (Model.OutUrl.Count > 1 && Model.InMultiUrl)
         {
-            <p class="font-weight-bold text-success">@SharedLocalizer["success"]</p>
+            <p class="font-weight-bold text-success">@Locale["success"]</p>
         }
         else
         {
-            <p class="font-weight-bold text-success">@SharedLocalizer["success_chain"]</p>
+            <p class="font-weight-bold text-success">@Locale["success_chain"]</p>
         }
 
         foreach (string item in @Model.OutUrl)
@@ -40,30 +40,30 @@
             if (@Model.OutSafeBrowsing)
             {
                 <p class="gsb">
-                    <span class="virusOff">@SharedLocalizer["safe"]</span>
-                    <span class="rem"> @SharedLocalizer["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@SharedLocalizer["gsafebrowsing"]">Google</a></span>
+                    <span class="virusOff">@Locale["safe"]</span>
+                    <span class="rem"> @Locale["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@Locale["gsafebrowsing"]">Google</a></span>
                 </p>
             }
             else
             {
                 <p class="gsb">
-                    <span class="virusOn">@SharedLocalizer["unsafe"]</span>
-                    <span class="rem"> @SharedLocalizer["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@SharedLocalizer["gsafebrowsing"]">Google</a></span>
+                    <span class="virusOn">@Locale["unsafe"]</span>
+                    <span class="rem"> @Locale["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@Locale["gsafebrowsing"]">Google</a></span>
                 </p>
             }
 
             if (@Model.OutAntivirusStatus == AntivirusStatusType.Error)
             {
                 <p class="drweb">
-                    <span class="font-weight-bold text-secondary" style="padding-left: 40px;">@SharedLocalizer["viruserr"]</span>
+                    <span class="font-weight-bold text-secondary" style="padding-left: 40px;">@Locale["viruserr"]</span>
                 </p>
             }
             else if (@Model.OutAntivirusStatus == AntivirusStatusType.Clear)
             {
                 <p class="drweb">
-                    <span class="virusOff">@SharedLocalizer["notinfected"]</span>
-                    <span class="rem"> @SharedLocalizer["checked"] <a href="http://www.drweb.com" target="_blank" title="@SharedLocalizer["drweb"]">Dr.Web</a></span>
-                    <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">@SharedLocalizer["viruslog"]</a>
+                    <span class="virusOff">@Locale["notinfected"]</span>
+                    <span class="rem"> @Locale["checked"] <a href="http://www.drweb.com" target="_blank" title="@Locale["drweb"]">Dr.Web</a></span>
+                    <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">@Locale["viruslog"]</a>
                 </p>
                 <div class="collapse" id="log">
                     <div class="card card-body" style="font-size: small;">@Html.Raw(@Model.OutAntivirusMessage)</div>
@@ -73,9 +73,9 @@
             else
             {
                 <p class="drweb">
-                    <span class="virusOn">@SharedLocalizer["infected"]</span>
-                    <span class="rem"> @SharedLocalizer["checked"] <a href="http://www.drweb.com" target="_blank" title="@SharedLocalizer["drweb"]">Dr.Web</a></span>
-                    <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">@SharedLocalizer["viruslog"]</a>
+                    <span class="virusOn">@Locale["infected"]</span>
+                    <span class="rem"> @Locale["checked"] <a href="http://www.drweb.com" target="_blank" title="@Locale["drweb"]">Dr.Web</a></span>
+                    <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">@Locale["viruslog"]</a>
                 </p>
                 <div class="collapse" id="log">
                     <div class="card card-body" style="font-size: small;">@Html.Raw(@Model.OutAntivirusMessage)</div>

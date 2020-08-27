@@ -56,8 +56,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #fdfdfd;
 }
 .footer {
   position: absolute;
@@ -168,6 +169,7 @@ input[type="checkbox"].input-validation-error {
 .color-param {
     color: #900000;
 }
+
 code {
     word-break: keep-all;
     overflow-x: auto;

@@ -1,4 +1,5 @@
 using System.Globalization;
+using LongUrl.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -35,6 +36,7 @@ namespace LongUrl
                 options.DefaultRequestCulture = new RequestCulture("ru");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
+                options.RequestCultureProviders.Insert(0, new QueryCultureProvider(options.DefaultRequestCulture));
             });
         }
 
@@ -62,7 +64,7 @@ namespace LongUrl
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                    pattern: "{action=Index}/{controller=Home}");
             });
         }
     }

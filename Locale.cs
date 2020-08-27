@@ -1,6 +1,6 @@
 ﻿namespace LongUrl
 {
-    public class SharedResource
+    public class Locale
     {
     }
 }

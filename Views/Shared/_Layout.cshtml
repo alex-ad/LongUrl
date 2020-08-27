@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@inject IHtmlLocalizer<Locale> Locale
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,9 +14,6 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                @*<a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                    <img src="images/logo30.png" loading="lazy"/>
-                </a>*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,17 +21,17 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">@SharedLocalizer["menu_main"]</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">@Locale["menu_main"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Api">@SharedLocalizer["menu_api"]</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Api">@Locale["menu_api"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">@SharedLocalizer["menu_about"]</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">@Locale["menu_about"]</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Language
+                                A&#12098;
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @await Html.PartialAsync("_SelectLanguagePartial")
@@ -45,21 +42,21 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container shadow pb-3 bg-white rounded">
+        <main role="main" class="p-4">
             <div class="mx-auto" style="width: 240px">
                 <a asp-controller="Home" asp-action="Index">
-                    <img class="mx-auto d-block" style="width: 240px" src="images/logov.png" />
+                    <img class="mx-auto d-block" style="width: 240px" src="/images/logov.png" />
                 </a>
             </div>
             <br />
             @RenderBody()
         </main>
     </div>
-
+    <br/>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2013 - LongUrl - <a asp-controller="Home" asp-action="About">@SharedLocalizer["menu_about"]</a>
+            &copy; 2013 - LongUrl - <a asp-controller="Home" asp-action="About">@Locale["menu_about"]</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

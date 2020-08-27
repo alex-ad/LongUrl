@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<Locale> Locale
+
+@{
+    ViewData["Title"] = Locale["menu_about"];
+}
+
+<h4>What is the Short URLs (short links), and why we have to disclose it</h4>
+<br />
+<div>
+    <p><strong>Short URLs</strong> were created for the comfortable sharing of links to any page on the Internet. There are many situations when the URLs are too long, so it's uncomfortable to share them with someone.</p>
+    <p>Well, imagine yourself what it is more convenient, share URLs (by mail, in chat... or to dictate!) length in ten characters, or five hundred. Here you go. That's the mission of all services by shortening URLs.</p>
+    <p>But, like so much else in this world, this tool has a negative side too. The fact is that clicking on a short URL, noone can see where, in fact, he goes. In a normal situation - if you got the short URL from a trusted person - there is nothing to worry about. However, since a moment of birth of short URLs, spammers and hackers begin to use this tool. As a result, by clicking on a short URL, you can easily turn on any threatening or abusive resource.</p>
+    <p>This brings us to the main question. To avoid an unpleasant situation, as described above, and was created this resource - <strong>Decoding (disclosure) short links (short URLs)</strong>.</p>
+    <p>
+        What that service suggests you:
+        <ul>
+            <li>Disclose (decode) short URLs</li>
+            <li>Check out the resource for malicious code using the Dr.Web Antivirus</li>
+            <li>Detect malicious URLs using Google Safe Browsing</li>
+        </ul>
+    </p>
+    <p>After the disclosure of short links, you may have to consciously decide to open a link, or not.</p>
+</div>

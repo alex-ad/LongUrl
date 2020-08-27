@@ -1,5 +1,3 @@
-using System;
-
 namespace LongUrl.Models
 {
     public class ErrorViewModel
