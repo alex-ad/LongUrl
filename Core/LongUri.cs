@@ -82,16 +82,17 @@ namespace LongUrl.Core
                 return;
             }
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
             HttpClient http = new HttpClient();
             http.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.89 Safari/537.36");
             http.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
             http.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
             http.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            http.BaseAddress = uri;
+            http.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
             HttpResponseMessage response;
             try
             {
-                response = await http.GetAsync(uri.ToString());
+                response = await http.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead);
             }
             catch (HttpRequestException ex)
             {
@@ -138,7 +139,8 @@ namespace LongUrl.Core
                 return;
             }
 
-            if (response.StatusCode == HttpStatusCode.BadGateway)
+            if ((response.StatusCode == HttpStatusCode.BadGateway)               // 502
+                || (response.StatusCode == HttpStatusCode.NotFound))             // 404
             {
                 var ret = response.RequestMessage.RequestUri.OriginalString.Trim(new[] { ' ', '/' });
                 _urlItem.Success = true;
