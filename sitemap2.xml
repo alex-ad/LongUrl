@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="https://www.w3.org/1999/xhtml">
-	<url>
-		<loc>https://longurl.info/</loc>
-	</url>
-	<url>
-		<loc>https://longurl.info/About</loc>
-	</url>
-	<url>
-		<loc>https://longurl.info/Api</loc>
-	</url>
-	<url>
-		<loc>https://longurl.info/?lang=en</loc>
-	</url>
-	<url>
-		<loc>https://longurl.info/About?lang=en</loc>
-	</url>
-	<url>
-		<loc>https://longurl.info/Api?lang=en</loc>
-	</url>
+  <url>
+    <loc>https://longurl.info/</loc>
+  </url>
+  <url>
+    <loc>https://longurl.info/About</loc>
+  </url>
+  <url>
+    <loc>https://longurl.info/Api</loc>
+  </url>
+  <url>
+    <loc>https://longurl.info/?lang=en</loc>
+  </url>
+  <url>
+    <loc>https://longurl.info/About?lang=en</loc>
+  </url>
+  <url>
+    <loc>https://longurl.info/Api?lang=en</loc>
+  </url>
 </urlset>

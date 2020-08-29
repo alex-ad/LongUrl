@@ -6,38 +6,42 @@
     ViewData["Page"] = "Api";
 }
 <h4>LongURL API</h4>
-<br />
+<br/>
 <p><strong>LongURL API</strong> – интерфейс для разработчиков, позволяющий раскрывать короткие ссылки с помощью HTTP GET-запроса к сайту longurl.info.</p>
-<h5><u>HTTP GET-запрос, пример с пояснениями</u></h5>
+<h5>
+    <u>HTTP GET-запрос, пример с пояснениями</u>
+</h5>
 <h6>Заголовок (Header)</h6>
 <code>GET https://longurl.info/api/2.0/?url=REQUEST_URL&antivirus=REQUEST_ANTIVIRUS</code>
-<br />
-<br />
+<br/>
+<br/>
 <h6>Параметры HTTP GET-запроса</h6>
 <ul>
     <li><strong class="color-param">REQUEST_URL</strong> – короткая ссылка для расшифровки в виде строки</li>
     <li><strong class="color-param">REQUEST_ANTIVIRUS</strong> – если указано <strong class="color-param">true</strong>, будет произведена антивирусная проверка конечного ресурса (после расшифровки короткой ссылки); если указано <strong class="color-param">false</strong>, или параметр <strong class="color-param">REQUEST_ANTIVIRUS</strong> пропущен, антивирусная проверка производиться не будет</li>
 </ul>
 <p>
-    <strong>Например</strong>,<br />
-    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ&antivirus=true</code><br />
-    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ&antivirus=false</code><br />
-    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ</code><br />
+    <strong>Например</strong>,<br/>
+    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ&antivirus=true</code><br/>
+    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ&antivirus=false</code><br/>
+    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ</code><br/>
 </p>
-<h5><u>HTTP GET-ответ, пример с пояснениями</u></h5>
+<h5>
+    <u>HTTP GET-ответ, пример с пояснениями</u>
+</h5>
 <h6>Заголовок (Header)</h6>
-<code>HTTP/1.1 200 OK<br />Content-Type: application/json</code>
-<br />
-<br />
+<code>HTTP/1.1 200 OK<br/>Content-Type: application/json</code>
+<br/>
+<br/>
 <h6>Тело HTTP GET-ответа</h6>
 <p>Тело ответа рассмотрим на основе вышеперечисленных примерах HTTP GET-запросов</p>
 <code>
-    {<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;"success": true,<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;"url": ["http://example.com"],<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusStatus": 0,<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusMessage": "HTML_BODY",<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;"safeBrowsing": true<br />
+    {<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;"success": true,<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;"url": ["http://example.com"],<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusStatus": 0,<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusMessage": "HTML_BODY",<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;"safeBrowsing": true<br/>
     }
 </code>
 <p>Как видно, ответ передается в виде JSON-строки.</p>
@@ -70,6 +74,16 @@
 </p>
 <p><strong>Примечание</strong>. Если антивирусная проверка не выполнялась, т.е. параметр <strong class="color-param">antivirus</strong> в HTTP GET-запросе равнялся <strong class="color-param">false</strong>, значение поля <strong class="color-param">safeBrowsing</strong> всегда будет <strong class="color-param">false</strong></p>
 <p><strong>Примечание</strong>. Если определена цепочка перенаправлений, антивирусную проверку будет проходить только последний ресурс в данной цепочке (т.е. последний элемент в массиве <strong class="color-param">url</strong>)</p>
-<hr />
-<p>(*) – сканирование ресурса на вирусы происходит с помощью <strong><a href="http://www.drweb.com/" target="_blank">Dr.Web</a></strong></p>
-<p>(**) – проверка потенциально небезопасных ресурсов происходит с помощью технологии <strong><a href="https://transparencyreport.google.com/safe-browsing/overview" target="_blank">Google Safe Browsing</a></strong></p>
+<hr/>
+<p>
+    (*) – сканирование ресурса на вирусы происходит с помощью
+    <strong>
+        <a href="http://www.drweb.com/" target="_blank">Dr.Web</a>
+    </strong>
+</p>
+<p>
+    (**) – проверка потенциально небезопасных ресурсов происходит с помощью технологии
+    <strong>
+        <a href="https://transparencyreport.google.com/safe-browsing/overview" target="_blank">Google Safe Browsing</a>
+    </strong>
+</p>

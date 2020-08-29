@@ -9,7 +9,7 @@ namespace LongUrl.Models
     {
         public RequestUrl(string url, bool antivirus)
         {
-            if ((string.IsNullOrEmpty(url)) || (url.Length < 4))
+            if (string.IsNullOrEmpty(url) || url.Length < 4)
                 throw new ArgumentException("The URL must be greater then 4 symbols", nameof(url));
             UrlList = null;
             UrlSingle = url;
@@ -19,7 +19,8 @@ namespace LongUrl.Models
 
         public RequestUrl(IndexViewModel data)
         {
-            UrlList = data.InUrlList?.Last()?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Distinct().ToList();
+            UrlList = data.InUrlList?.Last()?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)
+                .Distinct().ToList();
             MultiUrl = data.InMultiUrl;
             UrlSingle = data.InUrlSingle;
             Antivirus = data.InMultiUrl ? false : data.InAntivirus;

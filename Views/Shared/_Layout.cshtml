@@ -4,72 +4,72 @@
 <!DOCTYPE html>
 <html lang="@Locale["locale"]">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="@Locale["descript"]" />
-    <meta name="keywords" content="короткие ссылки, расшифровка коротких ссылок, раскрытие коротких ссылок, пакетная расшифровка коротких ссылок, настоящая ссылка, long link, long url, short url, decode short url, disclose short url, open short url, true url, short link, decode short link, disclose short link, true link, open short link" />
-    <meta name="robots" content="index,follow,noodp,noydir" />
-    <meta name="google-site-verification" content="WLVywf31rx5dRwcFWl-MqDPZa7oLP6BmqrbTZoTXyDk" />
-    <meta name='yandex-verification' content='462019d00df4d2bc' />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="@Locale["descript"]"/>
+    <meta name="keywords" content="короткие ссылки, расшифровка коротких ссылок, раскрытие коротких ссылок, пакетная расшифровка коротких ссылок, настоящая ссылка, long link, long url, short url, decode short url, disclose short url, open short url, true url, short link, decode short link, disclose short link, true link, open short link"/>
+    <meta name="robots" content="index,follow,noodp,noydir"/>
+    <meta name="google-site-verification" content="WLVywf31rx5dRwcFWl-MqDPZa7oLP6BmqrbTZoTXyDk"/>
+    <meta name="yandex-verification" content="462019d00df4d2bc"/>
     <title>@ViewData["Title"] - LongUrl</title>
-    <link rel="alternate" hreflang="en" href="https://longurl.info/@ViewData["Page"]?lang=en" />
-    <link rel="alternate" hreflang="ru" href="https://longurl.info/@ViewData["Page"]" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    @RenderSection("HeaderScripts", required: false)
+    <link rel="alternate" hreflang="en" href="https://longurl.info/@ViewData["Page"]?lang=en"/>
+    <link rel="alternate" hreflang="ru" href="https://longurl.info/@ViewData["Page"]"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    @RenderSection("HeaderScripts", false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">@Locale["menu_main"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Api">@Locale["menu_api"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">@Locale["menu_about"]</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                A&#12098;
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @await Html.PartialAsync("_SelectLanguagePartial")
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container shadow pb-3 bg-white rounded">
-        <main role="main" class="p-4">
-            <div class="mx-auto" style="width: 240px">
-                <a asp-controller="Home" asp-action="Index">
-                    <img class="mx-auto d-block" style="width: 240px" src="/images/logov.png" />
-                </a>
-            </div>
-            <br />
-            @RenderBody()
-        </main>
-    </div>
-    <br/>
-    <footer class="border-top footer text-muted">
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            &copy;2013 - <a href="mailto:longurl.info@gmail.com">longurl.info@gmail.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">@Locale["menu_main"]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Api">@Locale["menu_api"]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="About">@Locale["menu_about"]</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            A&#12098;
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @await Html.PartialAsync("_SelectLanguagePartial")
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    </nav>
+</header>
+<div class="container shadow pb-3 bg-white rounded">
+    <main role="main" class="p-4">
+        <div class="mx-auto" style="width: 240px">
+            <a asp-controller="Home" asp-action="Index">
+                <img class="mx-auto d-block" style="width: 240px" src="/images/logov.png"/>
+            </a>
+        </div>
+        <br/>
+        @RenderBody()
+    </main>
+</div>
+<br/>
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy;2013 - <a href="mailto:longurl.info@gmail.com">longurl.info@gmail.com</a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@RenderSection("Scripts", false)
 </body>
 </html>

@@ -1,81 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="https://www.w3.org/1999/xhtml">
-	<url>
-		<loc>https://longurl.info/</loc>
-		<xhtml:link
-			rel="alternate"
-			hreflang="en"
-			href="https://longurl.info/?lang=en"
-		/>
-		<xhtml:link
-			rel="alternate"
-			hreflang="ru"
-			href="https://longurl.info"
-		/>
-	</url>
-	<url>
-		<loc>https://longurl.info/About</loc>
-		<xhtml:link
-			rel="alternate"
-			hreflang="en"
-			href="https://longurl.info/About?lang=en"
-		/>
-		<xhtml:link
-			rel="alternate"
-			hreflang="ru"
-			href="https://longurl.info/About"
-		/>
-	</url>
-	<url>
-		<loc>https://longurl.info/Api</loc>
-		<xhtml:link
-			rel="alternate"
-			hreflang="en"
-			href="https://longurl.info/Api?lang=en"
-		/>
-		<xhtml:link
-			rel="alternate"
-			hreflang="ru"
-			href="https://longurl.info/Api"
-		/>
-	</url>
-	<url>
-		<loc>https://longurl.info/?lang=en</loc>
-		<xhtml:link
-			rel="alternate"
-			hreflang="ru"
-			href="https://longurl.info"
-		/>
-		<xhtml:link
-			rel="alternate"
-			hreflang="en"
-			href="https://longurl.info/?lang=en"
-		/>
-	</url>
-	<url>
-		<loc>https://longurl.info/About?lang=en</loc>
-		<xhtml:link
-			rel="alternate"
-			hreflang="ru"
-			href="https://longurl.info/About"
-		/>
-		<xhtml:link
-			rel="alternate"
-			hreflang="en"
-			href="https://longurl.info/About?lang=en"
-		/>
-	</url>
-	<url>
-		<loc>https://longurl.info/Api?lang=en</loc>
-		<xhtml:link
-			rel="alternate"
-			hreflang="ru"
-			href="https://longurl.info/Api"
-		/>
-		<xhtml:link
-			rel="alternate"
-			hreflang="en"
-			href="https://longurl.info/Api?lang=en"
-		/>
-	</url>
+  <url>
+    <loc>https://longurl.info/</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://longurl.info/?lang=en" />
+    <xhtml:link
+      rel="alternate"
+      hreflang="ru"
+      href="https://longurl.info" />
+  </url>
+  <url>
+    <loc>https://longurl.info/About</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://longurl.info/About?lang=en" />
+    <xhtml:link
+      rel="alternate"
+      hreflang="ru"
+      href="https://longurl.info/About" />
+  </url>
+  <url>
+    <loc>https://longurl.info/Api</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://longurl.info/Api?lang=en" />
+    <xhtml:link
+      rel="alternate"
+      hreflang="ru"
+      href="https://longurl.info/Api" />
+  </url>
+  <url>
+    <loc>https://longurl.info/?lang=en</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="ru"
+      href="https://longurl.info" />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://longurl.info/?lang=en" />
+  </url>
+  <url>
+    <loc>https://longurl.info/About?lang=en</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="ru"
+      href="https://longurl.info/About" />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://longurl.info/About?lang=en" />
+  </url>
+  <url>
+    <loc>https://longurl.info/Api?lang=en</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="ru"
+      href="https://longurl.info/Api" />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://longurl.info/Api?lang=en" />
+  </url>
 </urlset>

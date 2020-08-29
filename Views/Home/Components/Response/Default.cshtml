@@ -1,18 +1,17 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
-@inject IHtmlLocalizer<Locale> Locale
-@using System.Linq
+﻿@inject IHtmlLocalizer<Locale> Locale
+@using Microsoft.AspNetCore.Mvc.Localization
 @model LongUrl.ViewModels.IndexViewModel
 
-@if (@Model != null)
+@if (Model != null)
 {
-    if (!@Model.OutSuccess)
+    if (!Model.OutSuccess)
     {
         <div class="alert alert-warning" role="alert">
             @Locale["error"]
         </div>
     }
 
-    else if (@Model.OutUrl != null && @Model.OutUrl.Any())
+    else if (Model.OutUrl != null && Model.OutUrl.Any())
     {
         if (Model.OutUrl.Count == 1)
         {
@@ -27,46 +26,52 @@
             <p class="font-weight-bold text-success">@Locale["success_chain"]</p>
         }
 
-        foreach (string item in @Model.OutUrl)
+        foreach (var item in Model.OutUrl)
         {
             <a href="@item" target="_blank">@item</a>
-            <br />
+            <br/>
         }
 
         <div class="space"></div>
 
-        if (@Model.InAntivirus && !Model.InMultiUrl)
+        if (Model.InAntivirus && !Model.InMultiUrl)
         {
-            if (@Model.OutSafeBrowsing)
+            if (Model.OutSafeBrowsing)
             {
                 <p class="gsb">
                     <span class="virusOff">@Locale["safe"]</span>
-                    <span class="rem"> @Locale["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@Locale["gsafebrowsing"]">Google</a></span>
+                    <span class="rem">
+                        @Locale["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@Locale["gsafebrowsing"]">Google</a>
+                    </span>
                 </p>
             }
             else
             {
                 <p class="gsb">
                     <span class="virusOn">@Locale["unsafe"]</span>
-                    <span class="rem"> @Locale["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@Locale["gsafebrowsing"]">Google</a></span>
+                    <span class="rem">
+                        @Locale["checked"] <a href="https://www.google.com/transparencyreport/safebrowsing" target="_blank" title="@Locale["gsafebrowsing"]">Google</a>
+                    </span>
                 </p>
             }
 
-            if (@Model.OutAntivirusStatus == AntivirusStatusType.Error)
+            if (Model.OutAntivirusStatus == AntivirusStatusType.Error)
             {
                 <p class="drweb">
                     <span class="font-weight-bold text-secondary" style="padding-left: 40px;">@Locale["viruserr"]</span>
                 </p>
             }
-            else if (@Model.OutAntivirusStatus == AntivirusStatusType.Clear)
+            else if (Model.OutAntivirusStatus == AntivirusStatusType.Clear)
             {
                 <p class="drweb">
                     <span class="virusOff">@Locale["notinfected"]</span>
-                    <span class="rem"> @Locale["checked"] <a href="http://www.drweb.com" target="_blank" title="@Locale["drweb"]">Dr.Web</a></span>
+                    <span class="rem">
+                        @Locale["checked"] <a href="http://www.drweb.com" target="_blank" title="@Locale["drweb"]">Dr.Web</a>
+                    </span>
                     <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">@Locale["viruslog"]</a>
                 </p>
                 <div class="collapse" id="log">
-                    <div class="card card-body" style="font-size: small;">@Html.Raw(@Model.OutAntivirusMessage)</div>
+                    <div class="card card-body" style="font-size: small;">@Html.Raw(Model.OutAntivirusMessage)</div>
                 </div>
                 <div class="space"></div>
             }
@@ -74,11 +79,13 @@
             {
                 <p class="drweb">
                     <span class="virusOn">@Locale["infected"]</span>
-                    <span class="rem"> @Locale["checked"] <a href="http://www.drweb.com" target="_blank" title="@Locale["drweb"]">Dr.Web</a></span>
+                    <span class="rem">
+                        @Locale["checked"] <a href="http://www.drweb.com" target="_blank" title="@Locale["drweb"]">Dr.Web</a>
+                    </span>
                     <a class="btn btn-link btn-log" data-toggle="collapse" href="#log" role="button" aria-expanded="false" aria-controls="log">@Locale["viruslog"]</a>
                 </p>
                 <div class="collapse" id="log">
-                    <div class="card card-body" style="font-size: small;">@Html.Raw(@Model.OutAntivirusMessage)</div>
+                    <div class="card card-body" style="font-size: small;">@Html.Raw(Model.OutAntivirusMessage)</div>
                 </div>
                 <div class="space"></div>
             }

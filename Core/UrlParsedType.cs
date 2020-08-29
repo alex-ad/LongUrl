@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Primitives;
 
 namespace LongUrl.Core
 {
     public class UrlParsedType
     {
+        private string _current;
+        private string _next;
+
         public UrlParsedType(string url)
         {
             _current = url;
@@ -17,8 +17,6 @@ namespace LongUrl.Core
             Url = Get(url);
         }
 
-        private string _current;
-        private string _next;
         public string Url { get; }
 
         private string Get(string currentUri)
@@ -29,8 +27,8 @@ namespace LongUrl.Core
                 try
                 {
                     currentUri =
-                        (currentUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
-                         currentUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase))
+                        currentUri.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
+                        currentUri.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
                             ? currentUri
                             : "http://" + currentUri;
                     uri = new Uri(currentUri);
@@ -65,9 +63,6 @@ namespace LongUrl.Core
             {
                 return null;
             }
-            
         }
-
-        //private bool IsUrlValid(string url) => Regex.IsMatch(url, @"(http|https|ftp)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
     }
 }

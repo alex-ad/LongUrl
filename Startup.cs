@@ -79,8 +79,8 @@ namespace LongUrl
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{action=Index}/{controller=Home}");
+                    "default",
+                    "{action=Index}/{controller=Home}");
             });
         }
     }

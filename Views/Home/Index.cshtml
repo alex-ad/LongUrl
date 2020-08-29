@@ -1,5 +1,5 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
-@inject IHtmlLocalizer<Locale> Locale
+﻿@inject IHtmlLocalizer<Locale> Locale
+@using Microsoft.AspNetCore.Mvc.Localization
 @model LongUrl.ViewModels.IndexViewModel
 
 @{
@@ -17,16 +17,16 @@
     <div class="col">
         <form asp-action="Index" asp-controller="Home" asp-antiforgery="true">
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InSingleUrl" value="false" checked />
+                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InSingleUrl" value="false" checked/>
                 <label class="custom-control-label" for="InSingleUrl">@Locale["typeSingle"]</label>
             </div>
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InMultiUrl" value="true" />
+                <input class="custom-control-input" asp-for="InMultiUrl" type="radio" name="InMultiUrl" id="InMultiUrl" value="true"/>
                 <label class="custom-control-label" for="InMultiUrl">@Locale["typeMulti"]</label>
             </div>
             <div class="space"></div>
             <div id="TextUrlSingle" class="form-group @Html.Raw(Model != null && Model.InMultiUrl ? "hidden" : "")">
-                <input class="form-control form-control-sm urlSingle" asp-for="InUrlSingle" type="text" />
+                <input class="form-control form-control-sm urlSingle" asp-for="InUrlSingle" type="text"/>
                 <span asp-validation-for="InUrlSingle"></span>
             </div>
             <div id="TextUrlMulti" class="form-group @Html.Raw(Model != null && Model.InMultiUrl ? "" : "hidden")">
@@ -34,10 +34,10 @@
                 <span asp-validation-for="InUrlList"></span>
             </div>
             <div id="checkIsAntivirusCheck" class="custom-control custom-checkbox @Html.Raw(Model != null && Model.InMultiUrl ? "hidden" : "")">
-                <input class="custom-control-input" asp-for="InAntivirus" type="checkbox" id="InAntivirus" />
+                <input class="custom-control-input" asp-for="InAntivirus" type="checkbox" id="InAntivirus"/>
                 <label class="custom-control-label" for="InAntivirus">@Locale["chkVirus"]</label>
             </div>
-            <br />
+            <br/>
             <button type="submit" class="btn btn-sm btn-primary">@Locale["btnDecodeUrl"]</button>
         </form>
     </div>
@@ -53,7 +53,7 @@
 
 <div id="blockResponse" class="row" style="padding-top: 25px;">
     <div class="col">
-        <vc:response request="@Model" />
+        <vc:response request="@Model"/>
     </div>
 </div>
 
@@ -83,10 +83,11 @@
 @section Scripts{
     <div id="fb-root"></div>
     <script>
-    (function (d, s, id) {
+        (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.4&appId=266130700249591";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
@@ -98,10 +99,14 @@
         _gaq.push(['_setAccount', 'UA-17623452-4']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+                '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
         })();
 
     </script>

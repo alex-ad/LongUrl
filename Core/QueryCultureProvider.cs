@@ -22,11 +22,11 @@ namespace LongUrl.Core
         {
             var query = httpContext.Request.Query;
             if (!query.ContainsKey("lang") ||
-                !query.TryGetValue("lang", out StringValues lang) ||
+                !query.TryGetValue("lang", out var lang) ||
                 !Regex.IsMatch(lang, @"^[a-z]{2}(-[A-Z]{2})*$"))
             {
                 if (httpContext.Request.Cookies.TryGetValue(CookieRequestCultureProvider.DefaultCookieName,
-                    out string cookie))
+                    out var cookie))
                 {
                     var cultureString = cookie.Split("|");
                     var culture = cultureString.FirstOrDefault(x => Regex.IsMatch(x, @"(c=)([a-z]{2})"))?.Substring(2);
@@ -41,7 +41,7 @@ namespace LongUrl.Core
             httpContext.Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(lang)),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                new CookieOptions {Expires = DateTimeOffset.UtcNow.AddYears(1)}
             );
 
             return Task.FromResult(new ProviderCultureResult(new StringSegment(lang)));

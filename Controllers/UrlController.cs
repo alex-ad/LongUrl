@@ -19,15 +19,15 @@ namespace LongUrl.Controllers
             {
                 return await Task.Run(async () =>
                 {
-                    RequestUrl requestUrl = new RequestUrl(url, antivirus);
-                    LongUri longUri = new LongUri(requestUrl);
-                    ResponseUrl responseUrl = await longUri.Get();
+                    var requestUrl = new RequestUrl(url, antivirus);
+                    var longUri = new LongUri(requestUrl);
+                    var responseUrl = await longUri.Get();
                     return responseUrl;
                 });
             }
             catch (Exception)
             {
-                ResponseUrl responseUrl = new ResponseUrl();
+                var responseUrl = new ResponseUrl();
                 return responseUrl;
             }
         }
