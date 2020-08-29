@@ -2,13 +2,21 @@
 @inject IHtmlLocalizer<Locale> Locale
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@Locale["locale"]">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@Locale["descript"]" />
+    <meta name="keywords" content="короткие ссылки, расшифровка коротких ссылок, раскрытие коротких ссылок, пакетная расшифровка коротких ссылок, настоящая ссылка, long link, long url, short url, decode short url, disclose short url, open short url, true url, short link, decode short link, disclose short link, true link, open short link" />
+    <meta name="robots" content="index,follow,noodp,noydir" />
+    <meta name="google-site-verification" content="WLVywf31rx5dRwcFWl-MqDPZa7oLP6BmqrbTZoTXyDk" />
+    <meta name='yandex-verification' content='462019d00df4d2bc' />
     <title>@ViewData["Title"] - LongUrl</title>
+    <link rel="alternate" hreflang="en" href="https://longurl.info/@ViewData["Page"]?lang=en" />
+    <link rel="alternate" hreflang="ru" href="https://longurl.info/@ViewData["Page"]" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("HeaderScripts", required: false)
 </head>
 <body>
     <header>
@@ -56,7 +64,7 @@
     <br/>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2013 - LongUrl - <a asp-controller="Home" asp-action="About">@Locale["menu_about"]</a>
+            &copy;2013 - <a href="mailto:longurl.info@gmail.com">longurl.info@gmail.com</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

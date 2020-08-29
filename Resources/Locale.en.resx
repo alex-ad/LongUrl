@@ -135,9 +135,6 @@
   <data name="descript" xml:space="preserve">
     <value>Decoding of Short Links (URLs). Checking links and sites for viruses and other malware</value>
   </data>
-  <data name="descript_about" xml:space="preserve">
-    <value>About service of Decoding Short URLs. What is the Short URLs (short links), and why we have to disclose them</value>
-  </data>
   <data name="drweb" xml:space="preserve">
     <value>Dr.Web Antivirus</value>
   </data>
@@ -149,6 +146,9 @@
   </data>
   <data name="infected" xml:space="preserve">
     <value>Viruses detected</value>
+  </data>
+  <data name="locale" xml:space="preserve">
+    <value>en</value>
   </data>
   <data name="menu_about" xml:space="preserve">
     <value>About</value>
@@ -188,6 +188,9 @@
   </data>
   <data name="title_about" xml:space="preserve">
     <value>About service of Decoding Short URLs</value>
+  </data>
+  <data name="title_api" xml:space="preserve">
+    <value>API - developer interface</value>
   </data>
   <data name="typeMulti" xml:space="preserve">
     <value>Multi-URL Decoding</value>

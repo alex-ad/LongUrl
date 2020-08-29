@@ -135,9 +135,6 @@
   <data name="descript" xml:space="preserve">
     <value>Расшифровка коротких ссылок. Проверка ссылок и сайтов на вирусы и наличие вредоносного кода</value>
   </data>
-  <data name="descript_about" xml:space="preserve">
-    <value>О сервисе расшифровки коротких ссылок. Что такое короткие ссылки, и зачем их расшифровывать</value>
-  </data>
   <data name="drweb" xml:space="preserve">
     <value>Антивирус Dr.Web</value>
   </data>
@@ -149,6 +146,9 @@
   </data>
   <data name="infected" xml:space="preserve">
     <value>Обнаружены вирусы</value>
+  </data>
+  <data name="locale" xml:space="preserve">
+    <value>ru</value>
   </data>
   <data name="menu_about" xml:space="preserve">
     <value>О сервисе</value>
@@ -188,6 +188,9 @@
   </data>
   <data name="title_about" xml:space="preserve">
     <value>О сервисе расшифровки коротких ссылок</value>
+  </data>
+  <data name="title_api" xml:space="preserve">
+    <value>API - интерфейс разработчика</value>
   </data>
   <data name="typeMulti" xml:space="preserve">
     <value>Пакетная расшифровка коротких ссылок</value>

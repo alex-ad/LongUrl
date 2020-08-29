@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using LongUrl.Models;
@@ -88,7 +87,6 @@ namespace LongUrl.Core
             http.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
             http.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
             http.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            http.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
             HttpResponseMessage response;
             try
             {

@@ -31,8 +31,8 @@ namespace LongUrl
             {
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-                /*options.ForwardLimit = 2;
-                options.KnownProxies.Add(IPAddress.Parse("127.0.10.1"));*/
+                options.ForwardLimit = 2;
+                options.KnownProxies.Add(IPAddress.Parse("127.0.10.1"));
             });
 
             services.Configure<RequestLocalizationOptions>(options =>
