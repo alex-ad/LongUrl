@@ -12,4 +12,9 @@
     <None Remove="_images\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="sitemap.xml" />
+    <None Remove="sitemap2.xml" />
+  </ItemGroup>
+
 </Project>
