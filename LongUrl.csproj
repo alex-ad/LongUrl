@@ -13,8 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="favicon.ico" />
     <None Remove="sitemap.xml" />
     <None Remove="sitemap2.xml" />
+    <None Remove="todo.txt" />
   </ItemGroup>
 
 </Project>
