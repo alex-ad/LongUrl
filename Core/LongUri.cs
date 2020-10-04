@@ -95,11 +95,10 @@ namespace LongUrl.Core
             {
                 response = await http.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 return;
             }
-            //HttpResponseMessage response = await http.GetAsync(uri.ToString());
 
             if (response.StatusCode == HttpStatusCode.Redirect // 302
                 || response.StatusCode == HttpStatusCode.Moved // 301
