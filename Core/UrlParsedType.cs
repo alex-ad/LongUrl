@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace LongUrl.Core
 {
+    /// <summary>
+    /// Searching for any URL in the request string,
+    /// eg. if the target URL is a part of query parameter
+    /// </summary>
     public class UrlParsedType
     {
         private string _current;

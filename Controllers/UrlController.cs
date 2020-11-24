@@ -6,10 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LongUrl.Controllers
 {
+    /// <summary>
+    /// API Controller
+    /// </summary>
     [Route("api/2.0")]
     [ApiController]
     public class UrlController : ControllerBase
     {
+        /// <summary>
+        /// Action-method for processing incoming data (i.e. short URL) via WebAPI
+        /// </summary>
+        /// <param name="url">Input {get} param: ShortURL for decoding</param>
+        /// <param name="antivirus">Input {get} param: whether antivirus is On, either Off</param>
+        /// <returns></returns>
         [HttpGet]
         [Produces("application/json")]
         [ActionName("Request")]
@@ -19,9 +28,9 @@ namespace LongUrl.Controllers
             {
                 return await Task.Run(async () =>
                 {
-                    var requestUrl = new RequestUrl(url, antivirus);
+                    var requestUrl = new RequestUrl(url, antivirus);    // forming RequestUrl Model
                     var longUri = new LongUri(requestUrl);
-                    var responseUrl = await longUri.Get();
+                    var responseUrl = await longUri.Get();              // decoding ShortURL
                     return responseUrl;
                 });
             }
