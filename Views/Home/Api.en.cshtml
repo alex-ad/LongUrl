@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<Locale> Locale
+@model LongUrl.Models.AccessToken
 
 @{
     ViewData["Title"] = Locale["title_api"];
@@ -19,7 +20,7 @@
 <ul>
     <li><strong class="color-param">REQUEST_URL</strong> – short URL for uncovering as a string</li>
     <li><strong class="color-param">REQUEST_ANTIVIRUS</strong> – if <strong class="color-param">true</strong> is specified, an anti-virus scan of the target resource will be performed (after uncovering the short URL); if <strong class="color-param">false</strong> is specified or the <strong class="color-param">REQUEST_ANTIVIRUS</strong> parameter is omitted, anti-virus scanning will not be performed</li>
-    <li><strong class="color-param">API_TOKEN</strong> – токен (ключ) авторизации пользователя, привязываемый к электронной почте (См.ниже)</li>
+    <li><strong class="color-param">API_TOKEN</strong> – Authorization token (See below)</li>
 </ul>
 <p>
     <strong>For example</strong>,<br />
@@ -90,5 +91,5 @@
 </p>
 <hr />
 <p>
-    <vc:request-token request="@Model"></vc:request-token>
+    @await Html.PartialAsync("_RequestTokenPartial", Model)
 </p>

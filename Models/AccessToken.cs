@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace LongUrl.Models
@@ -13,6 +15,7 @@ namespace LongUrl.Models
 		[Required][MinLength(5)][DataType(DataType.EmailAddress)]
 		public string Email { get; set; }
 		public string Token { get; set; }
+		public DateTime Timestamp { get; set; }
 		[NotMapped]
 		public string ResultMessage { get; set; }
 
@@ -20,7 +23,11 @@ namespace LongUrl.Models
 		{
 			if (string.IsNullOrEmpty(Email)) throw new ArgumentNullException(nameof(Email));
 
-			Token = Email.GetHashCode(StringComparison.OrdinalIgnoreCase).ToString();
+			using (SHA1Managed sha1 = new SHA1Managed())
+			{
+				Token = BitConverter.ToString(sha1.ComputeHash(Encoding.UTF8.GetBytes(Email))).Replace("-", "");
+			}
+			Timestamp = DateTime.Now;
 		}
 	}
 }

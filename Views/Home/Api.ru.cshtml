@@ -90,6 +90,10 @@
     </strong>
 </p>
 <hr />
+<div class="row">
+    <div class="col">
+    </div>
+</div>
 <p>
-    <vc:request-token request="@Model"></vc:request-token>
+    @await Html.PartialAsync("_RequestTokenPartial", Model)
 </p>

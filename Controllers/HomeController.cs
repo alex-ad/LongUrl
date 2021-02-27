@@ -79,29 +79,29 @@ namespace LongUrl.Controllers
             return View(data);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RequestToken(AccessToken request)
-        {
-	        if (ModelState.IsValid)
-	        {
-		        request.ResultMessage = await AddToken(request);
-            }
-	        else
-	        {
-		        request.ResultMessage = _locale["token_error"];
-	        }
-	        return RedirectToAction("Api", new{ request.ResultMessage});
-        }
-
         /// <summary>
         /// API Page
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Api(AccessToken request)
+        public IActionResult Api()
         {
-            return View(request);
+            return View();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Api(AccessToken request)
+        {
+			if ( ModelState.IsValid )
+			{
+				request.ResultMessage = await AddToken(request);
+			} else
+			{
+				request.ResultMessage = _locale["token_error"];
+			}
+
+			return View(request);
         }
 
         /// <summary>
@@ -163,40 +163,39 @@ namespace LongUrl.Controllers
             }
         }
 
+        [NonAction]
         private async Task<string> AddToken(AccessToken request)
         {
 	        var result = string.Empty;
 
-	        await Task.Run(() =>
+            await Task.Run(() =>
 	        {
 		        if ( request == null )
 			        throw new ArgumentNullException(nameof(request));
 
-		        request.Email = request.Email.ToLower();
-		        if ( _tokensRepository.AccessTokens.Any() )
-		        {
-			        var t = _tokensRepository.AccessTokens.FirstOrDefaultAsync(x =>
-				        x.Email.Equals(request.Email)).Result;
+				request.Email = request.Email.ToLower();
+				if ( _tokensRepository.AccessTokens != null && _tokensRepository.AccessTokens.Any() )
+				{
+					var t = _tokensRepository.AccessTokens.FirstOrDefaultAsync(x =>
+						x.Email.Equals(request.Email)).Result;
 
-			        if ( t != null )
-				        result = _locale["token_exists"];
-		        }
+					if ( t != null )
+						result = _locale["token_exists"];
+				}
 
-		        if (string.IsNullOrEmpty(result))
-		        {
-			        try
-			        {
-				        request.GenerateNew();
-				        _tokensRepository.AddToken(request);
-				        Mailer.Send(request.Email, request.Token);
-
-				        result = _locale["token_success"];
-			        } catch ( Exception ex )
-			        {
-				        throw new ArgumentNullException("Error: ", ex.InnerException);
-			        }
-                }
-            });
+				if ( string.IsNullOrEmpty(result) )
+				{
+					try
+					{
+						request.GenerateNew();
+						_tokensRepository.AddToken(request);
+						result = _locale["token_success"] + ": " + request.Token;
+					} catch ( Exception ex )
+					{
+						throw new ArgumentNullException("Error: ", ex.InnerException);
+					}
+				}
+			});
 
 	        return result;
         }
