@@ -26,32 +26,47 @@ namespace LongUrl.Controllers
             _tokensRepository = tokens;
         }
 
+        /// <summary>
+        /// Main Page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Action-method for processing entered data (i.e. short URL) via WebUI
+        /// </summary>
+        /// <param name="data">MainPage ViewModel</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel data)
         {
+            // Set Model error: if mode MultiURL is On, but  URL-list is empty
             if (data.InMultiUrl && (data.InUrlList == null || !data.InUrlList.Any()))
                 ModelState.AddModelError(nameof(data.InUrlList), _locale["validation_set_urls"]);
 
+            // Set Model error: if mode SingleURL is On, but URL is empty of Length < 4
             if (!data.InMultiUrl && (string.IsNullOrEmpty(data.InUrlSingle) || data.InUrlSingle.Length < 4))
                 ModelState.AddModelError(nameof(data.InUrlSingle), _locale["validation_set_url"]);
 
+            // Ser model error: if mode MultiURL is On, and URL-list is set
             if (data.InMultiUrl && data.InUrlList != null && data.InUrlList.Any())
             {
+                // Split MultiURL multi-line text into a List
                 var list = data.InUrlList.Last()?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)
                     .Distinct().ToList();
+                // Set Model error: if result URL-list is empty
                 if (list == null || !list.Any())
                     ModelState.AddModelError(nameof(data.InUrlList), _locale["validation_set_urls"]);
             }
 
             if (ModelState.IsValid)
             {
+                // Start main process of shortURL decoding
                 var responseUrl = await GetLong(data);
                 data.OutAntivirusMessage = responseUrl.AntivirusMessage;
                 data.OutAntivirusStatus = responseUrl.AntivirusStatus;
@@ -79,18 +94,32 @@ namespace LongUrl.Controllers
 	        return RedirectToAction("Api", new{ request.ResultMessage});
         }
 
+        /// <summary>
+        /// API Page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Api(AccessToken request)
         {
             return View(request);
         }
 
+        /// <summary>
+        /// About Page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult About()
         {
             return View();
         }
 
+        /// <summary>
+        /// Action-method for define UI language via main menu
+        /// </summary>
+        /// <param name="culture">UI language (en, ru)</param>
+        /// <param name="returnUrl">Returning URL after UI language changing</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
@@ -109,6 +138,11 @@ namespace LongUrl.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
 
+        /// <summary>
+        /// Base Action-method for starting ShortURL-decoding process
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Task ResponseUrl</returns>
         [NonAction]
         private async Task<ResponseUrl> GetLong(IndexViewModel request)
         {
@@ -116,9 +150,9 @@ namespace LongUrl.Controllers
             {
                 return await Task.Run(async () =>
                 {
-                    var requestUrl = new RequestUrl(request);
+                    var requestUrl = new RequestUrl(request);   // forming RequestUrl Model
                     var longUri = new LongUri(requestUrl);
-                    var responseUrl = await longUri.Get();
+                    var responseUrl = await longUri.Get();      // decoding ShortURL
                     return responseUrl;
                 });
             }

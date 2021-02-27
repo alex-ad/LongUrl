@@ -9,10 +9,19 @@ using LongUrl.Models;
 
 namespace LongUrl.Core
 {
+    /// <summary>
+    /// Main class for decoding ShortURL
+    /// </summary>
     public class LongUri
     {
         private readonly RequestUrl _requestUrl;
         private readonly ResponseUrl _responseUrl;
+        /// <summary>
+        /// Current decoding URL in the chain of ShortURLs
+        /// What is it the chain? ShortURL is consist of chain of URLs often,
+        /// eg. http://short1.url redirects to http://short2.url, this one redirects to another,
+        /// and so on... til the "real" (LongURL) will be found
+        /// </summary>
         private UrlItem _urlItem;
 
         public LongUri(RequestUrl requestUrl)
@@ -22,11 +31,16 @@ namespace LongUrl.Core
             _responseUrl = new ResponseUrl();
         }
 
+        /// <summary>
+        /// Base loop to decode URLs one by one in the chain
+        /// </summary>
+        /// <returns></returns>
         public async Task<ResponseUrl> Get()
         {
             var list = new List<string>();
             try
             {
+                // 25 - is a maximum count of ShortURLs in the mode MultiURL (switching via WebUI)
                 if (_requestUrl.UrlList.Count > 25)
                     _requestUrl.UrlList.RemoveRange(25, _requestUrl.UrlList.Count - 25);
                 foreach (var uri in _requestUrl.UrlList)
@@ -36,8 +50,8 @@ namespace LongUrl.Core
                     list = new List<string>();
                     do
                     {
-                        var urlParsed = new UrlParsedType(_urlItem.Next);
-                        _urlItem.Next = urlParsed.Url;
+                        var urlParsed = new UrlParsedType(_urlItem.Next);               // parsing URL
+                        _urlItem.Next = urlParsed.Url;                                  // ... i.e. searching any URL (if exists) int the request string
                         await GetLongUrlFromShort(_urlItem.Next);
                         if (_urlItem.Uncovered != null) list.Add(_urlItem.Uncovered);
                     } while (!string.IsNullOrEmpty(_urlItem.Next));
@@ -66,6 +80,12 @@ namespace LongUrl.Core
             }
         }
 
+        /// <summary>
+        /// Core method to decode ShortURL
+        /// Algorithm is primitive and dumb: make http-request and analyze if there is some redirect or not
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         private async Task GetLongUrlFromShort(string url)
         {
             _urlItem.Success = false;
@@ -153,9 +173,12 @@ namespace LongUrl.Core
             }
         }
 
-        private bool IsUrlValid(string url)
-        {
-            return Regex.IsMatch(url, @"(ftp|http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
-        }
+        /// <summary>
+        /// Validates URL format
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private bool IsUrlValid(string url) =>
+            Regex.IsMatch(url, @"(ftp|http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
     }
 }

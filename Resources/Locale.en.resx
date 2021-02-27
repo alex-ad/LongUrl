@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnDecodeUrl" xml:space="preserve">
-    <value>Uncover URL(s)</value>
+    <value>Decode URL(s)</value>
   </data>
   <data name="bygoogle" xml:space="preserve">
     <value>Google</value>
@@ -133,13 +133,13 @@
     <value>Show/hide comments</value>
   </data>
   <data name="descript" xml:space="preserve">
-    <value>Decoding of Short Links (URLs). Checking links and sites for viruses and other malware</value>
+    <value>Decoding of Short URLs. Checking URLs and sites for viruses and other malware</value>
   </data>
   <data name="drweb" xml:space="preserve">
     <value>Dr.Web Antivirus</value>
   </data>
   <data name="error" xml:space="preserve">
-    <value>An error occurred while uncovering the specified URL. Check if it is correct.</value>
+    <value>An error occurred while decoding the specified URL. Check if it is correct.</value>
   </data>
   <data name="gsafebrowsing" xml:space="preserve">
     <value>Google Safe Browsing</value>
@@ -184,7 +184,7 @@
     <value>VKontakte</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Decoding of Short Links (URLs)</value>
+    <value>Decode Short URL</value>
   </data>
   <data name="title_about" xml:space="preserve">
     <value>About service of Decoding Short URLs</value>
@@ -217,10 +217,10 @@
     <value>Malicious URL</value>
   </data>
   <data name="validation_set_url" xml:space="preserve">
-    <value>Введите ссылку для расшифровки</value>
+    <value>Enter URL for Decode</value>
   </data>
   <data name="validation_set_urls" xml:space="preserve">
-    <value>Введите ссылки для расшифровки</value>
+    <value>Enter URLs for Decode</value>
   </data>
   <data name="viruserr" xml:space="preserve">
     <value>An unexpected error occurred</value>
