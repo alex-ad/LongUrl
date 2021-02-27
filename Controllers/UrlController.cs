@@ -14,6 +14,13 @@ namespace LongUrl.Controllers
     [ApiController]
     public class UrlController : ControllerBase
     {
+	    private readonly ITokensRepository _tokensRepository;
+
+        public UrlController(ITokensRepository token)
+        {
+	        _tokensRepository = token;
+
+        }
         /// <summary>
         /// Action-method for processing incoming data (i.e. short URL) via WebAPI
         /// </summary>
