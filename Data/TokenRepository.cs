@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using LongUrl.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,12 +24,23 @@ namespace LongUrl.Data
 
 		public bool IsTokenValid(string token)
 		{
-			if (!_context.AccessTokens.Any()) return false;
+			if (_context.AccessTokens == null || !_context.AccessTokens.Any()) return false;
 
 			var t = _context.AccessTokens.FirstOrDefaultAsync(x =>
-				x.Token.Equals(token));
+				x.Token.Equals(token)).Result;
 
-			return t.Result != null;
+			if (t == null) return false;
+
+			var dt = DateTime.Now;
+			TimeSpan ts = dt - t.Timestamp;
+
+			if (ts.TotalSeconds < 30) return false;
+
+			t.Timestamp = dt;
+			_context.Update(t);
+			_context.SaveChangesAsync();
+
+			return true;
 		}
 	}
 }

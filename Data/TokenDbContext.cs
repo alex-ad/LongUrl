@@ -12,6 +12,5 @@ namespace LongUrl.Data
 		public TokenDbContext(DbContextOptions<TokenDbContext> options) : base(options) { }
 
 		public DbSet<AccessToken> AccessTokens { get; set; }
-
 	}
 }
