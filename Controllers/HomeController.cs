@@ -3,11 +3,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LongUrl.Core;
+using LongUrl.Data;
 using LongUrl.Models;
 using LongUrl.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace LongUrl.Controllers
@@ -15,10 +18,12 @@ namespace LongUrl.Controllers
     public class HomeController : Controller
     {
         private readonly IStringLocalizer<Locale> _locale;
+        private readonly ITokensRepository _tokensRepository;
 
-        public HomeController(IStringLocalizer<Locale> locale)
+        public HomeController(IStringLocalizer<Locale> locale, ITokensRepository tokens)
         {
             _locale = locale;
+            _tokensRepository = tokens;
         }
 
         [HttpGet]
@@ -28,6 +33,7 @@ namespace LongUrl.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel data)
         {
             if (data.InMultiUrl && (data.InUrlList == null || !data.InUrlList.Any()))
@@ -58,10 +64,25 @@ namespace LongUrl.Controllers
             return View(data);
         }
 
-        [HttpGet]
-        public IActionResult Api()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RequestToken(AccessToken request)
         {
-            return View();
+	        if (ModelState.IsValid)
+	        {
+		        request.ResultMessage = await AddToken(request);
+            }
+	        else
+	        {
+		        request.ResultMessage = _locale["token_error"];
+	        }
+	        return RedirectToAction("Api", new{ request.ResultMessage});
+        }
+
+        [HttpGet]
+        public IActionResult Api(AccessToken request)
+        {
+            return View(request);
         }
 
         [HttpGet]
@@ -106,6 +127,43 @@ namespace LongUrl.Controllers
                 var responseUrl = new ResponseUrl();
                 return responseUrl;
             }
+        }
+
+        private async Task<string> AddToken(AccessToken request)
+        {
+	        var result = string.Empty;
+
+	        await Task.Run(() =>
+	        {
+		        if ( request == null )
+			        throw new ArgumentNullException(nameof(request));
+
+		        request.Email = request.Email.ToLower();
+		        if ( _tokensRepository.AccessTokens.Any() )
+		        {
+			        var t = _tokensRepository.AccessTokens.FirstOrDefaultAsync(x =>
+				        x.Email.Equals(request.Email)).Result;
+
+			        if ( t != null )
+				        result = _locale["token_exists"];
+		        }
+
+			    try
+			    {
+				    request.GenerateNew();
+				    _tokensRepository.AddToken(request);
+					Mailer.Send(request.Email, request.Token);
+
+				    result = _locale["token_success"];
+			    }
+			    catch (Exception ex)
+			    {
+				    throw new ArgumentNullException("Error: ", ex.InnerException);
+			    }
+			        
+            });
+
+	        return result;
         }
     }
 }

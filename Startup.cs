@@ -1,10 +1,12 @@
 using System.Globalization;
 using System.Net;
 using LongUrl.Core;
+using LongUrl.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +28,9 @@ namespace LongUrl
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddControllersWithViews()
                 .AddViewLocalization();
+
+            services.AddDbContext<TokenDbContext>(opts => opts.UseSqlite(Configuration["ConnectionStrings:TokensList"]));
+            services.AddScoped<ITokensRepository, TokenRepository>();
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {

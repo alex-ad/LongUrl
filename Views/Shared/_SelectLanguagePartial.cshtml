@@ -12,14 +12,6 @@
 
 @foreach (var item in cultureItems)
 {
-    @*<a class="dropdown-item"
-           asp-controller="Home"
-           asp-action="SetLanguage"
-           asp-route-returnUrl="@Context.Request.Path"
-           asp-route-lang="@item.Value">
-            @item.Text
-        </a>*@
-
     <a class="dropdown-item"
        asp-controller="Home"
        asp-action="SetLanguage"

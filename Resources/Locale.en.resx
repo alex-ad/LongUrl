@@ -192,6 +192,21 @@
   <data name="title_api" xml:space="preserve">
     <value>API - developer interface</value>
   </data>
+  <data name="token_btn_send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="token_error" xml:space="preserve">
+    <value>E-mail is invalid</value>
+  </data>
+  <data name="token_exists" xml:space="preserve">
+    <value>Token is already exists</value>
+  </data>
+  <data name="token_success" xml:space="preserve">
+    <value>Token is sent to E-mail</value>
+  </data>
+  <data name="token_wellcome" xml:space="preserve">
+    <value>Enter E-mail to request token</value>
+  </data>
   <data name="typeMulti" xml:space="preserve">
     <value>Multi-URL Decoding</value>
   </data>

@@ -192,6 +192,21 @@
   <data name="title_api" xml:space="preserve">
     <value>API - интерфейс разработчика</value>
   </data>
+  <data name="token_btn_send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="token_error" xml:space="preserve">
+    <value>Неверный E-mail</value>
+  </data>
+  <data name="token_exists" xml:space="preserve">
+    <value>Указанный E-mail уже занят</value>
+  </data>
+  <data name="token_success" xml:space="preserve">
+    <value>Токен отправлен на почту</value>
+  </data>
+  <data name="token_wellcome" xml:space="preserve">
+    <value>Введите E-mail для запроса токена</value>
+  </data>
   <data name="typeMulti" xml:space="preserve">
     <value>Пакетная расшифровка коротких ссылок</value>
   </data>

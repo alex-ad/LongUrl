@@ -6,42 +6,43 @@
     ViewData["Page"] = "Api";
 }
 <h4>LongURL API</h4>
-<br/>
+<br />
 <p><strong>LongURL API</strong> is an interface for developers to uncover short URLs using an HTTP-GET request to the longurl.info site.</p>
 <h5>
     <u>HTTP-GET request, example with explanations</u>
 </h5>
 <h6>Header</h6>
-<code>GET https://longurl.info/api/2.0/?url=REQUEST_URL&antivirus=REQUEST_ANTIVIRUS</code>
-<br/>
-<br/>
+<code>GET https://longurl.info/api/2.0/?token=API_TOKEN&url=REQUEST_URL&antivirus=REQUEST_ANTIVIRUS</code>
+<br />
+<br />
 <h6>HTTP-GET request parameters</h6>
 <ul>
     <li><strong class="color-param">REQUEST_URL</strong> – short URL for uncovering as a string</li>
     <li><strong class="color-param">REQUEST_ANTIVIRUS</strong> – if <strong class="color-param">true</strong> is specified, an anti-virus scan of the target resource will be performed (after uncovering the short URL); if <strong class="color-param">false</strong> is specified or the <strong class="color-param">REQUEST_ANTIVIRUS</strong> parameter is omitted, anti-virus scanning will not be performed</li>
+    <li><strong class="color-param">API_TOKEN</strong> – токен (ключ) авторизации пользователя, привязываемый к электронной почте (См.ниже)</li>
 </ul>
 <p>
-    <strong>For example</strong>,<br/>
-    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ&antivirus=true</code><br/>
-    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ&antivirus=false</code><br/>
-    <code>GET https://longurl.info/api/2.0/?url=https://bit.ly/2QnxnNZ</code><br/>
+    <strong>For example</strong>,<br />
+    <code>GET https://longurl.info/api/2.0/?token=111&token=API_TOKEN&url=https://bit.ly/2QnxnNZ&antivirus=true</code><br />
+    <code>GET https://longurl.info/api/2.0/?token=111&url=https://bit.ly/2QnxnNZ&antivirus=false</code><br />
+    <code>GET https://longurl.info/api/2.0/?token=111&url=https://bit.ly/2QnxnNZ</code><br />
 </p>
 <h5>
     <u>HTTP-GET response, example with explanations</u>
 </h5>
 <h6>Header</h6>
-<code>HTTP/1.1 200 OK<br/>Content-Type: application/json</code>
-<br/>
-<br/>
+<code>HTTP/1.1 200 OK<br />Content-Type: application/json</code>
+<br />
+<br />
 <h6>HTTP-GET response body</h6>
 <p>Consider the response body based on the above examples of HTTP-GET requests</p>
 <code>
-    {<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;"success": true,<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;"url": ["http://example.com"],<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusStatus": 0,<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusMessage": "HTML_BODY",<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;"safeBrowsing": true<br/>
+    {<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;"success": true,<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;"url": ["http://example.com"],<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusStatus": 0,<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;"antivirusMessage": "HTML_BODY",<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;"safeBrowsing": true<br />
     }
 </code>
 <p>As you can see, the response is sent as a JSON string.</p>
@@ -74,7 +75,7 @@
 </p>
 <p><strong>Note</strong>. If the anti-virus scan was not performed, i.e. the antivirus parameter in the HTTP-GET request was <strong class="color-param">false</strong>, the <strong class="color-param">safeBrowsing</strong> field value will always be <strong class="color-param">false</strong></p>
 <p><strong>Note</strong>. If a chain of redirects is defined, only the last resource in this chain will be scanned (i.e. the last element in the <strong class="color-param">url</strong> array)</p>
-<hr/>
+<hr />
 <p>
     (*) – the resource is scanned for viruses using
     <strong>
@@ -86,4 +87,8 @@
     <strong>
         <a href="https://transparencyreport.google.com/safe-browsing/overview" target="_blank">Google Safe Browsing</a>
     </strong> technology
+</p>
+<hr />
+<p>
+    <vc:request-token request="@Model"></vc:request-token>
 </p>
