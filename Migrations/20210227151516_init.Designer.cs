@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LongUrl.Migrations
 {
     [DbContext(typeof(TokenDbContext))]
-    [Migration("20210227145238_init")]
+    [Migration("20210227151516_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

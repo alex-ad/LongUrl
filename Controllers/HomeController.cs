@@ -182,19 +182,20 @@ namespace LongUrl.Controllers
 				        result = _locale["token_exists"];
 		        }
 
-			    try
-			    {
-				    request.GenerateNew();
-				    _tokensRepository.AddToken(request);
-					Mailer.Send(request.Email, request.Token);
+		        if (string.IsNullOrEmpty(result))
+		        {
+			        try
+			        {
+				        request.GenerateNew();
+				        _tokensRepository.AddToken(request);
+				        Mailer.Send(request.Email, request.Token);
 
-				    result = _locale["token_success"];
-			    }
-			    catch (Exception ex)
-			    {
-				    throw new ArgumentNullException("Error: ", ex.InnerException);
-			    }
-			        
+				        result = _locale["token_success"];
+			        } catch ( Exception ex )
+			        {
+				        throw new ArgumentNullException("Error: ", ex.InnerException);
+			        }
+                }
             });
 
 	        return result;
