@@ -6,12 +6,15 @@ using LongUrl.Core;
 using LongUrl.Data;
 using LongUrl.Models;
 using LongUrl.ViewModels;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using MimeKit;
 
 namespace LongUrl.Controllers
 {
@@ -96,6 +99,7 @@ namespace LongUrl.Controllers
 			if ( ModelState.IsValid )
 			{
 				request.ResultMessage = await AddToken(request);
+                if (!string.IsNullOrEmpty(request.Token)) await SendEmail(request);
 			} else
 			{
 				request.ResultMessage = _locale["token_error"];
@@ -189,7 +193,7 @@ namespace LongUrl.Controllers
 					{
 						request.GenerateNew();
 						_tokensRepository.AddToken(request);
-						result = _locale["token_success"] + ": " + request.Token;
+						result = _locale["token_success"];
 					} catch ( Exception ex )
 					{
 						throw new ArgumentNullException("Error: ", ex.InnerException);
@@ -199,5 +203,26 @@ namespace LongUrl.Controllers
 
 	        return result;
         }
+
+        [NonAction]
+        private async Task SendEmail(AccessToken token)
+        {
+	        var emailMessage = new MimeMessage();
+
+	        emailMessage.From.Add(new MailboxAddress("LongURL Mailer", "longurl.info@gmail.com"));
+	        emailMessage.To.Add(new MailboxAddress("", token.Email));
+	        emailMessage.Subject = "LongURL API Token";
+	        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+	        {
+		        Text = "Hello. Your token is: " + token.Token
+	        };
+
+			using var client = new SmtpClient();
+			await client.ConnectAsync("smtp.gmail.com", 465, SecureSocketOptions.Auto);
+			await client.AuthenticateAsync("longurl.info@gmail.com", "fgh5zj76k5ukf");
+			await client.SendAsync(emailMessage);
+
+			await client.DisconnectAsync(true);
+		}
     }
 }

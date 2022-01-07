@@ -202,7 +202,7 @@
     <value>Указанный E-mail уже занят</value>
   </data>
   <data name="token_success" xml:space="preserve">
-    <value>Поздравляем. Ваш токен</value>
+    <value>Поздравляем. Ваш токен выслан на указанный E-mail.</value>
   </data>
   <data name="token_wellcome" xml:space="preserve">
     <value>Введите E-mail для запроса токена</value>
